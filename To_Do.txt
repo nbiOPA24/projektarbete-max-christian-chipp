@@ -3,7 +3,7 @@
 ================================================== To do ==================================================================
 
 						*** Enemy   XP och Level
-						* Enemies     Lägga till xp reward?
+						*** Enemies     Lägga till xp reward?
 						* ta bort osynliga fienden från listan
 						*** Enemy Boss  Chipp Klar? bara boolen kvar?
 						* Exp system
