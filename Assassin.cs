@@ -22,7 +22,9 @@ namespace TutorialTheGame
             isVisible = false; // TODO: random på/av???
             Name = name;
             Experience = 5; //Får bestämma ;)
-            //Strength = 0;  
+            Level = Level * 0.3;
+            
+             
         }
 
         // Ger information om lönnmördaren.
@@ -47,7 +49,7 @@ namespace TutorialTheGame
                 Console.WriteLine($"{Name} Stabs you with it's dagger for {damage} damage");
                 Console.WriteLine("---------------------------");
 
-                isVisible = false;
+                isVisible = false;   
                 return damage;
             }
             else

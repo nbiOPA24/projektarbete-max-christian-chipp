@@ -14,7 +14,7 @@ namespace TutorialTheGame
         public int BaseDamage { get; set; }
         public int Armor { get; set; }
         public int Experience { get; set; } 
-        public int Level { get; set; }
+        public double Level { get; set; }
 
 
         //public Enemy(double strength, double stamina, double intelligence) : base(strength, stamina, intelligence)

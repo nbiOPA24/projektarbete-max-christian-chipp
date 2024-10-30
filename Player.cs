@@ -22,7 +22,7 @@ namespace TutorialTheGame
             PlayerStats = stats;
             PlayerHealth = PlayerStats.CalculateStamina(PlayerStats.Stamina, 100);
             PlayerDamage = PlayerStats.CalculateStrength(PlayerStats.Strength, 20);
-            PlayerMana = PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 5);
+            PlayerMana = PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 500);
             Armor = 0;
             shieldStrength = 0;
 
@@ -30,13 +30,15 @@ namespace TutorialTheGame
         public void TakeDamage(int damage)
         {
             //damage = Enemy.enemies[i].attack();
-
+            
+            // lägga till bool isShieldBroken så vi inte får samma meddelande hela tiden.
             if (shieldStrength > 0)
             {
                 int shieldAbsorbed = Math.Min(damage, shieldStrength);
                 damage -= shieldAbsorbed;
                 shieldStrength -= shieldAbsorbed;
                 Console.WriteLine($"Your ice shield absorbed {shieldAbsorbed} damage! remaining shield: {shieldStrength}");
+               
             }
             else if (damage > 0)
             {

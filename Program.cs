@@ -35,6 +35,7 @@ static class Program
         double playerMana = 0; */
         Stats playerStats = new Stats(10,10,5);
         Player player = new Player("BitchAss", playerStats);
+        CharacterSpells spells = new CharacterSpells();
         //Player player = new Player("");
         //playerHealth = playerStats.CalculateStamina(playerStats.Stamina, playerHealth);
         //playerMana = playerStats.CalculateIntelligence(playerStats.Intelligence, playerMana);
@@ -74,8 +75,9 @@ static class Program
             Console.WriteLine("Your options:");
             Console.WriteLine("1. Attack");
             Console.WriteLine("2. Heal");
-            Console.WriteLine("3. End The Game");
-            Console.Write("Choose 1-3:");
+            Console.WriteLine("3. Cast Spell");
+            Console.WriteLine("4. End The Game");
+            Console.Write("Choose 1-4:");
             string input = Console.ReadLine();
             
             Random random = new Random(); // används för att slumpa skada och häloregenerering
@@ -83,9 +85,9 @@ static class Program
             {
                 case "1": // Attackera en viss fiende
                     Console.Write("Who do you want to attack:");
+                    int enemyIndex = int.Parse(Console.ReadLine()) - 1;
                     // läs in vem spelaren vill attackera,
                     // tag värde -1 för att få rätt index i listan
-                    int enemyIndex = int.Parse(Console.ReadLine()) - 1;
                     // om spelaren valt en osynlig fiende, skriv ut felmeddelande och hoppa ur switchen
                     if (invisibleEnemyIndexes.Contains(enemyIndex))
                     {
@@ -93,10 +95,6 @@ static class Program
                         break;
                     }
                     // ge fienden skada:
-                    //double damage = Stats.IncreaseStats();
-                   // -- double damage = playerStats.CalculateStrength(playerStats.Strength, playerDamage) + random.Next(0,10); // Använder strength
-
-                    //double damage = playerDamage; //+ random.Next(0, 30);
                     if (enemyIndex >= 0 && enemyIndex < enemies.Count)
                     {
                         Enemy e = enemies[enemyIndex];
@@ -111,24 +109,107 @@ static class Program
                     {
                         Console.WriteLine("Invalid input!");
                     }
-                    
-                    /*Console.WriteLine("========================================");
-                    System.Console.WriteLine($"You attack {e.Name} for {damage} damage");
-                    Console.WriteLine("========================================");
-
-                    e.Defend(damage); */
                     break;
 
-                case "2": // Heala sig själv
-                    /*int heal = 50 + random.Next(0, 30);
-                    Console.WriteLine("========================================");
-                    Console.WriteLine($"You healed yourself for {heal}");
-                    Console.WriteLine("========================================");
-                    playerHealth += heal; */
+                case "2": 
                     player.Heal(50 + random.Next(0,30));
                     break;
+                case "3": // Välj en spell att kasta                // något som spökar när du ska kasta spells ++ lägga till så man inte kan attackera osynliga
+                    Console.WriteLine("Choose a spell:");
+                    Console.WriteLine("1. Fireball");
+                    Console.WriteLine("2. Lightning Strike");
+                    Console.WriteLine("3. Arcane Blast");
+                    Console.WriteLine("4. Poison Cloud");
+                    Console.WriteLine("5. Ice Shield");
+                    Console.Write("Choose 1-5: ");
+                    string spellInput = Console.ReadLine();
+                    //int spellEnemyIndex = -1;
+                    enemyIndex = int.Parse(Console.ReadLine()) - 1;
+                    if (spellInput == "1" || spellInput == "2" || spellInput == "3") // Kontrollera om det är en single-target spell
+                        {
+                            Console.Write("Choose an enemy to target with the spell: ");
+                            enemyIndex = int.Parse(Console.ReadLine()) - 1;
+                        }
 
-                case "3": // Avsluta spelet
+                    switch (spellInput)
+                    {
+                        case "1":
+                            double fireballDamage = spells.Fireball(player);
+                            if (fireballDamage > 0)
+                            {
+                               // Console.Write("Choose an enemy to hit with Fireball: ");
+                                //int spellenemyIndex = int.Parse(Console.ReadLine()) - 1;
+                                if (enemyIndex >= 0 && enemyIndex < enemies.Count)
+                                {
+                                    Enemy e = enemies[enemyIndex];
+                                    e.Health -= fireballDamage;
+                                    Console.WriteLine($"Dealt {fireballDamage} Fireball damage to {e.Name}");
+                                    if (e.Health <= 0) 
+                                    {
+                                        Console.WriteLine($"{e.Name} is defeated!");
+                                        enemies.RemoveAt(enemyIndex);
+                                    }
+                                }
+                            }
+                            break;
+
+                        case "2":
+                            double lightningDamage = spells.LightningStrike(player);
+                            if (lightningDamage > 0)
+                            {
+                                Console.Write("Choose an enemy to hit with Lightning Strike: ");
+                                //int spellenemyIndex = int.Parse(Console.ReadLine()) - 1;
+                                if (enemyIndex >= 0 && enemyIndex < enemies.Count)
+                                {
+                                    Enemy e = enemies[enemyIndex];
+                                    e.Health -= lightningDamage;
+                                    Console.WriteLine($"Dealt {lightningDamage} Lightning damage to {e.Name}");
+                                    if (e.Health <= 0) 
+                                    {
+                                        Console.WriteLine($"{e.Name} is defeated!");
+                                        enemies.RemoveAt(enemyIndex);
+                                    }
+                                }
+                            }
+                            break;
+
+                        case "3":
+                            double arcaneDamage = spells.ArcaneBlast(player);
+                            if (arcaneDamage > 0)
+                            {
+                                Console.Write("Choose an enemy to hit with Arcane Blast: ");
+                                //int enemyIndex = int.Parse(Console.ReadLine()) - 1;
+                                if (enemyIndex >= 0 && enemyIndex < enemies.Count)
+                                {
+                                    Enemy e = enemies[enemyIndex];
+                                    e.Health -= arcaneDamage;
+                                    Console.WriteLine($"Dealt {arcaneDamage} Arcane Blast damage to {e.Name}");
+                                    if (e.Health <= 0) 
+                                    {
+                                        Console.WriteLine($"{e.Name} is defeated!");
+                                        enemies.RemoveAt(enemyIndex);
+                                    }
+                                }
+                            }
+                            break;
+                    
+
+                        case "4":
+                            spells.PoisonCloud(enemies, player); // Skadar alla fiender i listan
+                            break;
+
+                        case "5":
+                            spells.IceShield(player); // Ger spelaren en sköld
+                            break;
+
+                        default:
+                            Console.WriteLine("Invalid spell selection");
+                            break;
+                        
+                    }
+                    break;
+
+                case "4": // Avsluta spelet
                     Console.WriteLine("End the game");
                     return;
 

@@ -2,18 +2,18 @@
 
 ================================================== To do ==================================================================
 
-						* Character   Typ klar
-						* Enemies     Lägga till boss och xp reward? /lägger det i experience klassen istället
+						*** Enemy   XP och Level
+						* Enemies     Lägga till xp reward?
 						* ta bort osynliga fienden från listan
-						* Enemy Boss  Chipp
+						*** Enemy Boss  Chipp Klar? bara boolen kvar?
 						* Exp system
-						* Stat system
+						*** Stat system  Klar
 						* Lägga till floors
 						* HP bar med färg
 						* UI
-						* Character klass
+						*** Character klass
 						* Välja start ras med försatta stat poäng
-						* Character spells
+						*** Character spells bara bug fixes med osynliga och spöket
 						* Sparning med Json
 						* Loot
 						* Vapen
