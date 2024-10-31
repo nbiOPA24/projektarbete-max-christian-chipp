@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System;
 using TutorialTheGame;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Security.Cryptography.X509Certificates;
 // -------TO DO LIST---------
 //--------Welcome to the Tutorial---------
 // 10 levels
@@ -30,15 +33,27 @@ static class Program
 {
     static void Main(string[] args)
     {
-       /* double playerHealth = 100; // sätt spelarens starthälsa
-        double playerDamage = 20;
-        double playerMana = 0; */
+      
         Stats playerStats = new Stats(10,10,5);
         Player player = new Player("BitchAss", playerStats);
         CharacterSpells spells = new CharacterSpells();
-        //Player player = new Player("");
-        //playerHealth = playerStats.CalculateStamina(playerStats.Stamina, playerHealth);
-        //playerMana = playerStats.CalculateIntelligence(playerStats.Intelligence, playerMana);
+
+        Console.WriteLine("Do you want to load a saved game? (y/n)");
+        string loadInput = Console.ReadLine().ToLower();
+
+        if (loadInput == "y")
+        {
+            Player loadedPlayer = GameDataManager.LoadGame("savegame.json");
+            if (loadedPlayer != null)
+            {
+                player = loadedPlayer;
+                Console.WriteLine("Game loaded!");
+            }
+            else
+            {
+                Console.WriteLine("Failed to load game. Starting a new game.");
+            }
+        }
        
 
         // skapa en lista med fiender
@@ -77,16 +92,19 @@ static class Program
             Console.WriteLine("1. Attack");
             Console.WriteLine("2. Heal");
             Console.WriteLine("3. Cast Spell");
-            Console.WriteLine("4. End The Game");
+            Console.WriteLine("4. Save Game");
+            Console.WriteLine("5. End The Game");
             Console.Write("Choose 1-4:");
             string input = Console.ReadLine();
             
             Random random = new Random(); // används för att slumpa skada och häloregenerering
+            int enemyIndex = -1;
+
             switch (input)
             {
                 case "1": // Attackera en viss fiende
                     Console.Write("Who do you want to attack:");
-                    int enemyIndex = int.Parse(Console.ReadLine()) - 1;
+                    enemyIndex = int.Parse(Console.ReadLine()) - 1;
                     // läs in vem spelaren vill attackera,
                     // tag värde -1 för att få rätt index i listan
                     // om spelaren valt en osynlig fiende, skriv ut felmeddelande och hoppa ur switchen
@@ -108,7 +126,7 @@ static class Program
                     }
                     else 
                     {
-                        Console.WriteLine("Invalid input!");
+                        Console.WriteLine("Invalid input!");  
                     }
                     break;
 
@@ -125,7 +143,7 @@ static class Program
                     Console.Write("Choose 1-5: ");
                     string spellInput = Console.ReadLine();
                     //int spellEnemyIndex = -1;
-                    enemyIndex = int.Parse(Console.ReadLine()) - 1;
+                   // enemyIndex = int.Parse(Console.ReadLine()) - 1;
                     if (spellInput == "1" || spellInput == "2" || spellInput == "3") // Kontrollera om det är en single-target spell
                         {
                             Console.Write("Choose an enemy to target with the spell: ");
@@ -209,8 +227,12 @@ static class Program
                         
                     }
                     break;
+                case "4":
+                    GameDataManager.SaveGame(player, "savegame.json");
+                    Console.WriteLine("Game saved!");
+                    break;
 
-                case "4": // Avsluta spelet
+                case "5": // Avsluta spelet
                     Console.WriteLine("End the game");
                     return;
 

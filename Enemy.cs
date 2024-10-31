@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TutorialTheGame
 {
-    class Enemy
+    public class Enemy
     {
         // Alla fiender ska ha detta gemensamt:
         public string Name { get; set; }

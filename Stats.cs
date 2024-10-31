@@ -9,7 +9,7 @@ namespace TutorialTheGame
 {
     // TODO, göra playermana, sätta mana cost på heal, få increasestats med stamina och intelligence.
 
-    internal class Stats
+    public class Stats
     {
 
        /* public string Name { get; set; }
