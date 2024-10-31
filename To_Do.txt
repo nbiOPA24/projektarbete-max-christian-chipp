@@ -14,7 +14,7 @@
 						*** Character klass
 						* Välja start ras med försatta stat poäng
 						*** Character spells bara bug fixes med osynliga och spöket
-						* Sparning med Json
+						*** Sparning med Json bara hantera lite buggar kvar
 						* Loot
 						* Vapen
 						* Inventory

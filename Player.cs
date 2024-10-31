@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TutorialTheGame
 {
-    class Player
+    public class Player
     {
         public string Name { get; set; }
         public double PlayerHealth { get; set; }
