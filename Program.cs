@@ -56,6 +56,7 @@ static class Program
             // Skriv ut en meny
             Console.WriteLine("========================================");
             Console.WriteLine($"You have {player.PlayerHealth} HP left");
+            Console.WriteLine($"You have {player.PlayerMana} Mana Left");
             Console.WriteLine("========================================");
             Console.WriteLine("Existing enemies:");
             List<int> invisibleEnemyIndexes = new List<int>();
