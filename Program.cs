@@ -99,6 +99,7 @@ static class Program
             
             Random random = new Random(); // används för att slumpa skada och häloregenerering
             int enemyIndex = -1;
+            Enemy e = null;
 
             switch (input)
             {
@@ -113,17 +114,14 @@ static class Program
                         Console.WriteLine("There was no enemy to attack, you strike air");
                         break;
                     }
+                    e = enemies[enemyIndex];  // måste ligga efter if satsen för att kontrollera om det är osynligt eller ej
                     // ge fienden skada:
-                    if (enemyIndex >= 0 && enemyIndex < enemies.Count)
-                    {
-                        Enemy e = enemies[enemyIndex];
-                        player.AttackEnemy(e);
+                    player.AttackEnemy(e);
                         if (e.Health <= 0)
                         {
                             Console.WriteLine($"{e.Name} is defeated!");
                             enemies.RemoveAt(enemyIndex);
                         }
-                    }
                     else 
                     {
                         Console.WriteLine("Invalid input!");  
@@ -133,7 +131,7 @@ static class Program
                 case "2": 
                     player.Heal(50 + random.Next(0,30));
                     break;
-                case "3": // Välj en spell att kasta                // något som spökar när du ska kasta spells ++ lägga till så man inte kan attackera osynliga
+                case "3": // Välj en spell att kasta               
                     Console.WriteLine("Choose a spell:");
                     Console.WriteLine("1. Fireball");
                     Console.WriteLine("2. Lightning Strike");
@@ -142,25 +140,24 @@ static class Program
                     Console.WriteLine("5. Ice Shield");
                     Console.Write("Choose 1-5: ");
                     string spellInput = Console.ReadLine();
-                    //int spellEnemyIndex = -1;
-                   // enemyIndex = int.Parse(Console.ReadLine()) - 1;
                     if (spellInput == "1" || spellInput == "2" || spellInput == "3") // Kontrollera om det är en single-target spell
                         {
                             Console.Write("Choose an enemy to target with the spell: ");
                             enemyIndex = int.Parse(Console.ReadLine()) - 1;
+                            if (enemyIndex < 0 || enemyIndex >= enemies.Count || invisibleEnemyIndexes.Contains(enemyIndex))
+                            {
+                                Console.WriteLine("Your spell goes in the air and dissapears.");
+                                break;
+                            }
+                            e = enemies[enemyIndex]; // måste ligga efter if satsen så den hinner kontrollera om den är osynlig eller ej
                         }
 
                     switch (spellInput)
                     {
                         case "1":
                             double fireballDamage = spells.Fireball(player);
-                            if (fireballDamage > 0)
+                            if (fireballDamage > 0 && e != null)
                             {
-                               // Console.Write("Choose an enemy to hit with Fireball: ");
-                                //int spellenemyIndex = int.Parse(Console.ReadLine()) - 1;
-                                if (enemyIndex >= 0 && enemyIndex < enemies.Count)
-                                {
-                                    Enemy e = enemies[enemyIndex];
                                     e.Health -= fireballDamage;
                                     Console.WriteLine($"Dealt {fireballDamage} Fireball damage to {e.Name}");
                                     if (e.Health <= 0) 
@@ -168,19 +165,14 @@ static class Program
                                         Console.WriteLine($"{e.Name} is defeated!");
                                         enemies.RemoveAt(enemyIndex);
                                     }
-                                }
                             }
                             break;
 
                         case "2":
                             double lightningDamage = spells.LightningStrike(player);
-                            if (lightningDamage > 0)
+                            if (lightningDamage > 0 && e != null)
                             {
                                 Console.Write("Choose an enemy to hit with Lightning Strike: ");
-                                //int spellenemyIndex = int.Parse(Console.ReadLine()) - 1;
-                                if (enemyIndex >= 0 && enemyIndex < enemies.Count)
-                                {
-                                    Enemy e = enemies[enemyIndex];
                                     e.Health -= lightningDamage;
                                     Console.WriteLine($"Dealt {lightningDamage} Lightning damage to {e.Name}");
                                     if (e.Health <= 0) 
@@ -188,19 +180,14 @@ static class Program
                                         Console.WriteLine($"{e.Name} is defeated!");
                                         enemies.RemoveAt(enemyIndex);
                                     }
-                                }
                             }
                             break;
 
                         case "3":
                             double arcaneDamage = spells.ArcaneBlast(player);
-                            if (arcaneDamage > 0)
+                            if (arcaneDamage > 0 && e != null)
                             {
                                 Console.Write("Choose an enemy to hit with Arcane Blast: ");
-                                //int enemyIndex = int.Parse(Console.ReadLine()) - 1;
-                                if (enemyIndex >= 0 && enemyIndex < enemies.Count)
-                                {
-                                    Enemy e = enemies[enemyIndex];
                                     e.Health -= arcaneDamage;
                                     Console.WriteLine($"Dealt {arcaneDamage} Arcane Blast damage to {e.Name}");
                                     if (e.Health <= 0) 
@@ -208,7 +195,6 @@ static class Program
                                         Console.WriteLine($"{e.Name} is defeated!");
                                         enemies.RemoveAt(enemyIndex);
                                     }
-                                }
                             }
                             break;
                     
