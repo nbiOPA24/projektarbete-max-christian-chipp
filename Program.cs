@@ -4,7 +4,10 @@ using TutorialTheGame;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Security.Cryptography.X509Certificates;
+<<<<<<< HEAD
+=======
 
+>>>>>>> Cwot
 // -------TO DO LIST---------
 //--------Welcome to the Tutorial---------
 // 10 levels
@@ -15,6 +18,13 @@ using System.Security.Cryptography.X509Certificates;
 // utrustning, vapen, drops?
 // index som uppdateras när fiender dör/försvinner
 // 
+//
+//  
+// Spells, mortal strike, fireball / cc?, sneack attack?
+//
+// confuse? random attack
+// crit chanse,dodge chanse?
+
 // Spells, mortal strike, fireball / cc?, sneack attack?
 // confuse? random attack
 // crit chanse, dodge chanse?
@@ -162,36 +172,131 @@ static class Program
                                         Console.WriteLine($"{e.Name} is defeated!");
                                         enemies.RemoveAt(enemyIndex);
                                     }
-                                }
-                                break;
+                            }
+                            break;
 
-                            case "2":
-                                double lightningDamage = spells.LightningStrike(player);
-                                if (lightningDamage > 0 && enemyIndex >= 0 && enemyIndex < enemies.Count)
-                                {
-                                    Enemy e = enemies[enemyIndex];
+                        case "2":
+                            double lightningDamage = spells.LightningStrike(player);
+                            if (lightningDamage > 0 && e != null)
+                            {
+                                Console.Write("Choose an enemy to hit with Lightning Strike: ");
                                     e.Health -= lightningDamage;
                                     Console.WriteLine($"Dealt {lightningDamage} Lightning damage to {e.Name}");
-                                    if (e.Health <= 0)
+                                    if (e.Health <= 0) 
                                     {
                                         Console.WriteLine($"{e.Name} is defeated!");
                                         enemies.RemoveAt(enemyIndex);
                                     }
-                                }
-                                break;
+                            }
+                            break;
 
-                            case "3":
-                                double arcaneDamage = spells.ArcaneBlast(player);
-                                if (arcaneDamage > 0 && enemyIndex >= 0 && enemyIndex < enemies.Count)
-                                {
-                                    Enemy e = enemies[enemyIndex];
+                        case "3":
+                            double arcaneDamage = spells.ArcaneBlast(player);
+                            if (arcaneDamage > 0 && e != null)
+                            {
+                                Console.Write("Choose an enemy to hit with Arcane Blast: ");
                                     e.Health -= arcaneDamage;
                                     Console.WriteLine($"Dealt {arcaneDamage} Arcane Blast damage to {e.Name}");
-                                    if (e.Health <= 0)
+                                    if (e.Health <= 0) 
                                     {
                                         Console.WriteLine($"{e.Name} is defeated!");
                                         enemies.RemoveAt(enemyIndex);
                                     }
+                            }
+                            break;
+                    
+
+                        case "4":
+                            spells.PoisonCloud(enemies, player); // Skadar alla fiender i listan
+                            break;
+
+                        case "5":
+                            spells.IceShield(player); // Ger spelaren en sköld
+                            break;
+
+                        default:
+                            Console.WriteLine("Invalid spell selection");
+                            break;
+                        
+                    }
+                    break;
+                case "4":
+                    GameDataManager.SaveGame(player, "savegame.json");
+                    Console.WriteLine("Game saved!");
+                    break;
+
+                case "5": // Avsluta spelet
+                    Console.WriteLine("End the game");
+                    return;
+
+                default:
+                    Console.WriteLine("Wrong input");
+                    break;
+            }
+
+            // ---------------------------------------------
+            // Gå igenom alla fiender, en efter en och:
+            //
+            // OM:      en fiende har 0 eller mindre hälsa, skriv att den är död
+            //          och ta bort den ur listan
+            // 
+            // ANNARS   låt fienden attackera spelaren 
+            // ---------------------------------------------
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                // om fienden har 0 eller mindre hälsa, döda den
+                if (enemies[i].Health <= 0)
+                {
+                    Console.WriteLine("------------------------------------");
+                    Console.WriteLine($"***  {enemies[i].Name} died  ***");
+                    Console.WriteLine("------------------------------------");
+                    // ta bort fienden från listan utifrån dess index
+                    enemies.RemoveAt(i);
+
+                    // i och med att denna fiende tas bort från listan så kommer 
+                    // alla andra fiender att flyttas ett steg uppåt i listan
+                    // Därför måste vi minska i med 1 för att inte hoppa över en fiende
+                    i--;
+                    // Vi hoppar över resten av loopen och går till nästa iteration.
+                    continue;
+                }
+                else if (enemies[i] is Shaman shaman)
+                {
+                    shaman.Heal(enemies);
+                }
+                else
+                {
+                    // om vi inte kör continue ovan, riskerar vi att hamna out of bounds
+                    // , på sista elementet
+
+                    // Fienden gör sin attack på spelaren:
+                    //playerHealth -= enemies[i].Attack();
+                    player.TakeDamage(enemies[i].Attack());
+                }
+            }
+
+            // ---------------------------------------------
+            // Kontrollera om spelaren har dött, isf avsluta mainloopen
+            if (player.PlayerHealth <= 0)
+            {
+                Console.WriteLine("-------------------------------");
+                Console.WriteLine("***** You died try again *****");
+                Console.WriteLine("-------------------------------");
+
+                break;
+            }
+
+            else if (enemies.Count <= 0 && invisibleEnemyIndexes.Count <= 0)
+            {
+                Console.WriteLine("--------You have cleared the Tutorial!--------");
+            }
+            // Vänta på att användaren ska trycka på en tangent och rensa skärmen
+            Console.ReadKey();
+            Console.Clear();
+        }
+        Console.WriteLine("*****  GAME OVER LOSER  *****");
+        Console.ReadKey();
+    }
                                 }
                                 break;
 

@@ -1,0 +1,37 @@
+
+
+================================================== To do ==================================================================
+
+						*** Enemy   XP och Level
+						*** Enemies     Lägga till xp reward?
+						* ta bort osynliga fienden från listan
+						*** Enemy Boss  Chipp Klar? bara boolen kvar?
+						* Exp system
+						*** Stat system  Klar
+						* Lägga till floors
+						* HP bar med färg
+						* UI
+						*** Character klass
+						* Välja start ras med försatta stat poäng
+						*** Character spells bara bug fixes med osynliga och spöket
+						*** Sparning med Json bara hantera lite buggar kvar
+						* Loot
+						* Vapen
+						* Inventory
+						* Shop / eventuell guld? potions?
+						* eventuell storage manager(bank) som har alla vapen
+						
+===========================================================================================================================
+
+ändra om enemy konstruktorn inuti stats istället och minska redundans.
+Fixes: Combat klass med take damage / defend etc.
+item level som modifer?
+Random mobs som kommer varje level
+vapen = svärd, sköld, 2h, staff, båge? 
+mage ability = mana shield
+gömma assasin från listan? eller göra den så att den kanske inte är osynlig
+lägga till dexterity? hit chance?
+weapon experience?
+scenarios ?? inlevelse, berättelse när du går upp i level
+olika difficulties ?
+mini boss som har random chans att spawna?
