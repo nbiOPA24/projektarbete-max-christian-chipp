@@ -15,6 +15,8 @@ namespace TutorialTheGame
         public int shieldStrength { get; set; }
         public double Armor { get; set; }
         public Stats PlayerStats {get; set;}
+        public List<Weapon> Inventory {get; set;}
+        public Weapon EquippedWeapon {get;set;}
 
         public Player(string name, Stats stats)
         {
@@ -25,7 +27,13 @@ namespace TutorialTheGame
             PlayerMana = PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 500);
             Armor = 0;
             shieldStrength = 0;
+            Inventory = new List<Weapon>();
 
+        }
+        public void EquipWeapon(Weapon weapon)
+        {
+            EquippedWeapon = weapon;
+            Console.WriteLine($"{Name} has equipped {weapon.Name}");
         }
         public void TakeDamage(int damage)
         {
