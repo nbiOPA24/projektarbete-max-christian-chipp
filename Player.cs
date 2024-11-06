@@ -36,6 +36,14 @@ namespace TutorialTheGame
             Level = 1;
 
         }
+        public void ShowInventory()
+        {
+            Console.WriteLine("Your Inventory:");
+            foreach (var weapon in Inventory)
+            {
+                Console.WriteLine($"{weapon.Name} - Damage: {weapon.Damage}, Type: {weapon.Type}, Rarity: {weapon.Rarity}");
+            }
+        }
         public void AddExperience(int xp)
         {
             Experience += xp;
@@ -54,7 +62,7 @@ namespace TutorialTheGame
         {
             Level++;
             Experience = 0;
-           // PlayerStats.IncreaseStats(5); // Exempel på att ge 5 extra stat-poäng
+            PlayerStats.IncreaseStats(5); // Exempel på att ge 5 extra stat-poäng
             Console.WriteLine($"Congratulations! {Name} leveled up to level {Level}!");
         }
 

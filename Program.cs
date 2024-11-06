@@ -244,6 +244,15 @@ static class Program
                     Console.WriteLine($"***  {enemies[i].Name} died  ***");
                     Console.WriteLine("------------------------------------");
                     // ta bort fienden från listan utifrån dess index
+                    if (enemies[i].Lootable != null && enemies[i].Lootable.Count > 0)
+                    {
+                        foreach (var weapon in enemies[i].Lootable)
+                        {
+                            player.Inventory.Add(weapon);
+                            Console.WriteLine($"{weapon.Name} has been added to your inventory!");
+                        }
+                    }
+
                     enemies.RemoveAt(i);
 
                     // i och med att denna fiende tas bort från listan så kommer 
