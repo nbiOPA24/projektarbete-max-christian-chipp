@@ -1,8 +1,10 @@
 ﻿﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 
 namespace TutorialTheGame
 {
@@ -17,6 +19,8 @@ namespace TutorialTheGame
         public Stats PlayerStats {get; set;}
         public List<Weapon> Inventory {get; set;}
         public Weapon EquippedWeapon {get;set;}
+        public int Experience {get; set;}
+        public int Level {get ; set;}
 
         public Player(string name, Stats stats)
         {
@@ -28,8 +32,33 @@ namespace TutorialTheGame
             Armor = 0;
             shieldStrength = 0;
             Inventory = new List<Weapon>();
+            Experience = 0;
+            Level = 1;
 
         }
+        public void AddExperience(int xp)
+        {
+            Experience += xp;
+            if (Experience >= GetExperienceForNextLevel())
+            {
+                LevelUp();
+            }
+        }
+
+        private int GetExperienceForNextLevel()
+        {
+            return Level * 100; // exempel: 100 XP per level
+        }
+
+        private void LevelUp()
+        {
+            Level++;
+            Experience = 0;
+           // PlayerStats.IncreaseStats(5); // Exempel på att ge 5 extra stat-poäng
+            Console.WriteLine($"Congratulations! {Name} leveled up to level {Level}!");
+        }
+
+       
         public void EquipWeapon(Weapon weapon)
         {
             EquippedWeapon = weapon;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace TutorialTheGame
     {
         public List<Weapon> Weapons {get; set;}
 
+
         public Loot()
         {
             Weapons = new List<Weapon>();
@@ -19,4 +21,6 @@ namespace TutorialTheGame
             Weapons.Add(weapon);
         }
     }
+   
 }
+

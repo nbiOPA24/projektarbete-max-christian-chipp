@@ -15,8 +15,24 @@ namespace TutorialTheGame
         public int Armor { get; set; }
         public int Experience { get; set; } 
         public double Level { get; set; }
+        public int ExperienceValue {get ; set;}
+        public List<Weapon> Lootable {get ; set;}
 
 
+    public Enemy(string name, int xp)
+    {
+        Name = name;
+        ExperienceValue = xp;
+        Lootable = GenerateLoot();
+    }
+
+    private List<Weapon> GenerateLoot()
+    {
+        // första försök lista
+        return new List<Weapon> { new Weapon("Sword of power", 15, "Sword", "Normal"), new Weapon("Axe of fury", 20, "Axe", "Normal") }; 
+    }
+
+   
         //public Enemy(double strength, double stamina, double intelligence) : base(strength, stamina, intelligence)
         //{
         //    strength = 0;
