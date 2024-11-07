@@ -10,7 +10,7 @@ namespace TutorialTheGame
     {
         public int WhirlWind { get; set; }
         bool isGiant;
-        public Boss(string name)
+        public Boss(string name) : base(name, 25)
         {
             Random random = new Random();
             Name = name;

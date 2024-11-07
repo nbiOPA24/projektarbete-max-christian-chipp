@@ -13,7 +13,7 @@ namespace TutorialTheGame
         public double Health { get; set; }
         public int BaseDamage { get; set; }
         public int Armor { get; set; }
-        public int Experience { get; set; } 
+       // public int Experience { get; set; } 
         public double Level { get; set; }
         public int ExperienceValue {get ; set;}
         public List<Weapon> Lootable {get ; set;}

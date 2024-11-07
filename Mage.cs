@@ -12,7 +12,7 @@ namespace TutorialTheGame
         public int Mana { get; set; }
 
         // konstruktor för att skapa magikern:
-        public Mage(string name)
+        public Mage(string name, int xp) : base(name, 10)
         {
             BaseDamage = 10;
             Random random = new Random();
@@ -20,7 +20,7 @@ namespace TutorialTheGame
             Mana = 20 + random.Next(0, 80);
             Armor = 5;
             Name = name;
-            Experience = 5;  // Får bestämma ;)
+            //Experience = 5;  // Får bestämma ;)
         }
 
         // Magikern attackerar

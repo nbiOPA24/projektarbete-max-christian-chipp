@@ -58,8 +58,8 @@ static class Program
 
         // skapa en lista med fiender
         List<Enemy> enemies = new List<Enemy>();
-        enemies.Add(new Mage("Human Cultist"));
-        enemies.Add(new Assassin("Shadow Goblin"));
+        enemies.Add(new Mage("Human Cultist", 10));
+        enemies.Add(new Assassin("Shadow Goblin", 10));
         //enemies.Add(new Mage("Human Cultist"));
        // enemies.Add(new Assassin("Shadow Goblin"));
         enemies.Add(new Warrior("Orc Warrior"));
