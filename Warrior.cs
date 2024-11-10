@@ -11,7 +11,7 @@ namespace TutorialTheGame
     { 
         public int Rage { get; set; }
 
-        public Warrior(string name)
+        public Warrior(string name) : base(name, 10)
         {
 
             Random random = new Random();
@@ -20,7 +20,7 @@ namespace TutorialTheGame
             BaseDamage = 15;
             Armor = 20;
             Rage = 0;
-            Experience = 5;
+            //Experience = 5;
             //ExpReward = 5; // får bestämma ;)
         }
 

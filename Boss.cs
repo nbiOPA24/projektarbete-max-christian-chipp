@@ -8,16 +8,16 @@ namespace TutorialTheGame
 {
     class Boss : Enemy
     {
-        public int WhirlWind { get; set; }
+        public int Rage { get; set; }
         bool isGiant;
-        public Boss(string name)
+        public Boss(string name) : base(name, 25)
         {
             Random random = new Random();
             Name = name;
             Health = 500 + random.Next(0, 100);
             BaseDamage = 50;
             Armor = 100;
-            WhirlWind = 0;
+            Rage = 0;
             isGiant = true;  // vad är denna till för ? framtid tanke?
         }
 
@@ -28,14 +28,14 @@ namespace TutorialTheGame
             int damage;
             Random random = new Random();
             damage = BaseDamage + random.Next(0, 100);
-            if (WhirlWind >= 110)
+            if (Rage >= 110)
             {
                 damage = random.Next(75, 175);
                 Console.WriteLine($"{Name}You spin me right round, Baby, right round like barb in d2 swinging his axe, right round {damage}");
                 Console.WriteLine("--------------------");
 
-                WhirlWind += random.Next(25, 50);
-                WhirlWind -= 110;
+                Rage += random.Next(25, 50);
+                Rage -= 110;
             }
             else
             {

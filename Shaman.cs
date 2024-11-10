@@ -13,7 +13,7 @@ namespace TutorialTheGame
         public int BaseHeal { get; set; }
 
         // konstruktor för att skapa magikern:
-        public Shaman(string name)
+        public Shaman(string name): base(name, 10)
         {
             //BaseDamage = 10;
             BaseHeal = 5;
@@ -22,7 +22,7 @@ namespace TutorialTheGame
             Mana = 20 + random.Next(0, 80);
             Armor = 5;
             Name = name;
-            Experience = 5;
+            //Experience = 5;
             // ExpReward = 5; // Får bestämma :D
         }
 

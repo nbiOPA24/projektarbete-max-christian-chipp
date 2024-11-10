@@ -4,10 +4,6 @@ using TutorialTheGame;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Security.Cryptography.X509Certificates;
-<<<<<<< HEAD
-=======
-
->>>>>>> Cwot
 // -------TO DO LIST---------
 //--------Welcome to the Tutorial---------
 // 10 levels
@@ -62,6 +58,20 @@ static class Program
                 Console.WriteLine("Failed to load game. Starting a new game.");
             }
         }
+       
+
+        // skapa en lista med fiender
+        List<Enemy> enemies = new List<Enemy>();
+        enemies.Add(new Mage("Human Cultist", 10));
+        enemies.Add(new Assassin("Shadow Goblin", 10));
+        //enemies.Add(new Mage("Human Cultist"));
+       // enemies.Add(new Assassin("Shadow Goblin"));
+        enemies.Add(new Warrior("Orc Warrior"));
+        enemies.Add(new Shaman("Hobgoblin shaman"));
+
+        // spelloop - spelet körs så länge spelaren har hälsa kvar
+        while (player.PlayerHealth > 0)
+
 
         while (player.PlayerHealth > 0 && currentLevel <= 10)
         {

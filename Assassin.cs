@@ -13,15 +13,15 @@ namespace TutorialTheGame
         bool isVisible;
 
         // Konstruktor
-        public Assassin(string name)
+        public Assassin(string name, int xp) : base(name, 10)
         {
+            Name = name;
             Random random = new Random();
             Health = 35 + random.Next(0, 30);
             BaseDamage = 20;
             Armor = 15;
             isVisible = false; // TODO: random på/av???
-            Name = name;
-            Experience = 5; //Får bestämma ;)
+           // xp = 5; //Får bestämma ;) får ha det i konstruktorn istället
             Level = Level * 0.3;
             
              
