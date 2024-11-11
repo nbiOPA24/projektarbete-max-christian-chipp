@@ -44,6 +44,16 @@ namespace TutorialTheGame
                 Console.WriteLine($"{weapon.Name} - Damage: {weapon.Damage}, Type: {weapon.Type}, Rarity: {weapon.Rarity}");
             }
         }
+        public void EquipWeapon(Weapon weapon)
+        {
+            EquippedWeapon = weapon;
+            Console.WriteLine($"{Name} has equipped {weapon.Name}");
+        }
+        public void PickUpLoot(Weapon weapon)
+        {
+            Inventory.Add(weapon);
+            Console.WriteLine($"{Name} has picked up an {weapon.Rarity} weapon: {weapon.Name} with {weapon.Damage} damage, Amazing!");
+        }
         public void AddExperience(int xp)
         {
             Experience += xp;
@@ -67,11 +77,6 @@ namespace TutorialTheGame
         }
 
        
-        public void EquipWeapon(Weapon weapon)
-        {
-            EquippedWeapon = weapon;
-            Console.WriteLine($"{Name} has equipped {weapon.Name}");
-        }
         public void TakeDamage(int damage)
         {
             //damage = Enemy.enemies[i].attack();

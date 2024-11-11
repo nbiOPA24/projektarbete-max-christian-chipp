@@ -34,7 +34,7 @@ static class Program
     static void Main(string[] args)
     {
       
-        Stats playerStats = new Stats(10,10,5);
+        Stats playerStats = new Stats(10,100,5);
         Player player = new Player("BitchAss", playerStats);
         CharacterSpells spells = new CharacterSpells();
 
@@ -64,6 +64,36 @@ static class Program
        // enemies.Add(new Assassin("Shadow Goblin"));
         enemies.Add(new Warrior("Orc Warrior"));
         enemies.Add(new Shaman("Hobgoblin shaman"));
+                
+       /* foreach (var enemy in enemies)  // TEST FÖR ATT SE ATT VAPEN FUNGERAR 
+        {
+            if (enemy.loot == null)
+            {
+                Console.WriteLine($"Warning: {enemy.Name} does not have a loot instance.");
+                continue;
+            }
+
+            Weapon testLoot = enemy.DropLoot();
+            if (testLoot == null)
+            {
+                Console.WriteLine($"Warning: {enemy.Name} could not drop loot (loot list might be empty).");
+            }
+            else
+            {
+                Console.WriteLine($"Test: {enemy.Name} can drop {testLoot.Name} with {testLoot.Damage} damage.");
+            }
+        }
+        Loot lootTest = new Loot();
+        Weapon testWeapon = lootTest.GenerateLoot();
+
+        if (testWeapon != null)
+        {
+            Console.WriteLine($"Test loot: {testWeapon.Name} with {testWeapon.Damage} damage and rarity {testWeapon.Rarity}.");
+        }
+        else
+        {
+            Console.WriteLine("Test loot failed to generate a weapon.");
+        } */ 
 
         // spelloop - spelet körs så länge spelaren har hälsa kvar
         while (player.PlayerHealth > 0)
@@ -86,6 +116,7 @@ static class Program
                     // Ingen utskrift här...
                     invisibleEnemyIndexes.Add(i); // lägg till indexet i listan med osynliga fiender
                 }
+                
             }
             Console.WriteLine("---------------------------");
             Console.WriteLine("Your options:");
@@ -94,6 +125,7 @@ static class Program
             Console.WriteLine("3. Cast Spell");
             Console.WriteLine("4. Save Game");
             Console.WriteLine("5. End The Game");
+            Console.WriteLine("6. Show Inventory");
             Console.Write("Choose 1-4:");
             string input = Console.ReadLine();
             
@@ -117,15 +149,6 @@ static class Program
                     e = enemies[enemyIndex];  // måste ligga efter if satsen för att kontrollera om det är osynligt eller ej
                     // ge fienden skada:
                     player.AttackEnemy(e);
-                        if (e.Health <= 0)
-                        {
-                            Console.WriteLine($"{e.Name} is defeated!");
-                            enemies.RemoveAt(enemyIndex);
-                        }
-                    else 
-                    {
-                        Console.WriteLine("Invalid input!");  
-                    }
                     break;
 
                 case "2": 
@@ -158,13 +181,7 @@ static class Program
                             double fireballDamage = spells.Fireball(player);
                             if (fireballDamage > 0 && e != null)
                             {
-                                    e.Health -= fireballDamage;
-                                    Console.WriteLine($"Dealt {fireballDamage} Fireball damage to {e.Name}");
-                                    if (e.Health <= 0) 
-                                    {
-                                        Console.WriteLine($"{e.Name} is defeated!");
-                                        enemies.RemoveAt(enemyIndex);
-                                    }
+                                e.Defend(fireballDamage);
                             }
                             break;
 
@@ -172,14 +189,7 @@ static class Program
                             double lightningDamage = spells.LightningStrike(player);
                             if (lightningDamage > 0 && e != null)
                             {
-                                Console.Write("Choose an enemy to hit with Lightning Strike: ");
-                                    e.Health -= lightningDamage;
-                                    Console.WriteLine($"Dealt {lightningDamage} Lightning damage to {e.Name}");
-                                    if (e.Health <= 0) 
-                                    {
-                                        Console.WriteLine($"{e.Name} is defeated!");
-                                        enemies.RemoveAt(enemyIndex);
-                                    }
+                                e.Defend(lightningDamage);
                             }
                             break;
 
@@ -187,14 +197,7 @@ static class Program
                             double arcaneDamage = spells.ArcaneBlast(player);
                             if (arcaneDamage > 0 && e != null)
                             {
-                                Console.Write("Choose an enemy to hit with Arcane Blast: ");
-                                    e.Health -= arcaneDamage;
-                                    Console.WriteLine($"Dealt {arcaneDamage} Arcane Blast damage to {e.Name}");
-                                    if (e.Health <= 0) 
-                                    {
-                                        Console.WriteLine($"{e.Name} is defeated!");
-                                        enemies.RemoveAt(enemyIndex);
-                                    }
+                                e.Defend(arcaneDamage);
                             }
                             break;
                     
@@ -221,6 +224,10 @@ static class Program
                 case "5": // Avsluta spelet
                     Console.WriteLine("End the game");
                     return;
+                
+                case "6":
+                    player.ShowInventory();
+                    break;
 
                 default:
                     Console.WriteLine("Wrong input");
@@ -244,13 +251,18 @@ static class Program
                     Console.WriteLine($"***  {enemies[i].Name} died  ***");
                     Console.WriteLine("------------------------------------");
                     // ta bort fienden från listan utifrån dess index
-                    if (enemies[i].Lootable != null && enemies[i].Lootable.Count > 0)
+                    Console.WriteLine($"Attempting to drop loot from {enemies[i].Name}...");
+
+
+                    Weapon droppedLoot = enemies[i].DropLoot();
+                    if (droppedLoot != null)
                     {
-                        foreach (var weapon in enemies[i].Lootable)
-                        {
-                            player.Inventory.Add(weapon);
-                            Console.WriteLine($"{weapon.Name} has been added to your inventory!");
-                        }
+                        player.PickUpLoot(droppedLoot);
+                     
+                    }
+                    else 
+                    {
+                        Console.WriteLine("No loot");
                     }
 
                     enemies.RemoveAt(i);

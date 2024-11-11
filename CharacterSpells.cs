@@ -115,7 +115,8 @@ namespace TutorialTheGame
             if (player.PlayerMana >= 20)
             {
                 Random random = new Random();
-                shieldStrength = (int) (20 * player.PlayerStats.Intelligence + random.Next(0, 30));
+                shieldStrength = (int) (40 * player.PlayerStats.Intelligence + random.Next(0, 30));
+                player.shieldStrength = shieldStrength;
                 Console.WriteLine($"You cast a ice shield that protects you for {shieldStrength}!");
                 Console.WriteLine("---------------------------");
                 player.PlayerMana -= 20;
@@ -125,7 +126,7 @@ namespace TutorialTheGame
             {
                 Console.WriteLine("You don't have enough mana to cast");
                 Console.WriteLine("---------------------------");
-                shieldStrength = 0;
+                //shieldStrength = 0;
                 // kanske ha en plus mana här men vet inte ifall den kommer bara ge massa mana tills man kan casta igen eller om det blir per turn.
             }
             

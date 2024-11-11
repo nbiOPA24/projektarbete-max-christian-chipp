@@ -16,58 +16,45 @@ namespace TutorialTheGame
        // public int Experience { get; set; } 
         public double Level { get; set; }
         public int ExperienceValue {get ; set;}
+        public Loot loot;
         public List<Weapon> Lootable {get ; set;}
 
 
-    public Enemy(string name, int xp)
-    {
-        Name = name;
-        ExperienceValue = xp;
-        Lootable = GenerateLoot();
-    }
-
-    private List<Weapon> GenerateLoot()
-    {
-        // första försök lista
-        return new List<Weapon> { new Weapon("Sword of power", 15, "Sword", "Normal"), new Weapon("Axe of fury", 20, "Axe", "Normal") }; 
-    }
-
-   
-        //public Enemy(double strength, double stamina, double intelligence) : base(strength, stamina, intelligence)
-        //{
-        //    strength = 0;
-        //    stamina = 0;
-        //    intelligence= 0;
-
-        //}
-       // public Stats EnemyStats {get; set;}
-       /* public Enemy (Stats enemyStats)
+        public Enemy(string name, int xp)
         {
-            EnemyStats = enemyStats;
+            Name = name;
+            ExperienceValue = xp;
+            //Lootable = GenerateLoot();
+            loot = new Loot();
         }
-        */
-        // Metoder som alla fiender ska ha. Dessa anropas med hjälp av polymorfism:
 
-        // En metod för att ge info information om fienden
+        public Weapon DropLoot()
+        {
+            return loot.GenerateLoot();
+        } 
+    
+            // Metoder som alla fiender ska ha. Dessa anropas med hjälp av polymorfism:
+
+            // En metod för att ge info information om fienden
         public virtual string GetInfo() // ?
         {
             return $"{Name} have {Health} HP";
         }
 
-        // Fienden attackerar.
+            // Fienden attackerar.
         public virtual int Attack()
         {
-            return 0;
+                return 0;
         }
 
-        // Fienden försvarar sig.
+            // Fienden försvarar sig.
         public virtual void Defend(double damage)
         {
-            double totalDamage = damage - Armor;
-            System.Console.WriteLine($"{Name} takes {totalDamage} damage");
-            Console.WriteLine("========================================");
-            Console.WriteLine();
-            Health -= totalDamage;
+                double totalDamage = damage - Armor;
+                System.Console.WriteLine($"{Name} takes {totalDamage} damage");
+                Console.WriteLine("========================================");
+                Console.WriteLine();
+                Health -= totalDamage;
         }
     }
 }
