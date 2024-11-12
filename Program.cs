@@ -4,6 +4,7 @@ using TutorialTheGame;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Security.Cryptography.X509Certificates;
+using System.Transactions;
 // -------TO DO LIST---------
 //--------Welcome to the Tutorial---------
 // 10 levels
@@ -29,6 +30,15 @@ using System.Security.Cryptography.X509Certificates;
 // Total damage display
 // Race/name/Weapon väljs som start
 // En ide, lägga till raser, raser har olika allokerade stats som bas, när sedan dingar i spelet så får man statPoints att lägga ut.
+
+
+// Frame symbols saved for later (possible) use:
+// ╔══╦══╗  ╔═════╗  ╔══╤══╗
+// ║  ║  ║  ╠═════╣  ║  |  ║
+// ╚══╩══╝  ╚═════╝  ╚══╧══╝
+// ╔╗
+// ║║           läggat ill threadsleep på enemy attacker
+// ╚╝
 static class Program
 {
     static void Main(string[] args)
@@ -37,6 +47,8 @@ static class Program
         Stats playerStats = new Stats(10,100,5);
         Player player = new Player("BitchAss", playerStats);
         CharacterSpells spells = new CharacterSpells();
+        FloorHandler floorHandler = new FloorHandler();
+        bool gameCompleted = false;
 
         Console.WriteLine("Do you want to load a saved game? (y/n)");
         string loadInput = Console.ReadLine().ToLower();
@@ -54,16 +66,6 @@ static class Program
                 Console.WriteLine("Failed to load game. Starting a new game.");
             }
         }
-       
-
-        // skapa en lista med fiender
-        List<Enemy> enemies = new List<Enemy>();
-        enemies.Add(new Mage("Human Cultist", 10));
-        enemies.Add(new Assassin("Shadow Goblin", 10));
-        //enemies.Add(new Mage("Human Cultist"));
-       // enemies.Add(new Assassin("Shadow Goblin"));
-        enemies.Add(new Warrior("Orc Warrior"));
-        enemies.Add(new Shaman("Hobgoblin shaman"));
                 
        /* foreach (var enemy in enemies)  // TEST FÖR ATT SE ATT VAPEN FUNGERAR 
         {
@@ -96,12 +98,16 @@ static class Program
         } */ 
 
         // spelloop - spelet körs så länge spelaren har hälsa kvar
-        while (player.PlayerHealth > 0)
+        while (player.PlayerHealth > 0 && !gameCompleted)
         {
+            List<Enemy> enemies = floorHandler.CreateEnemies();
             // Skriv ut en meny
+            while (enemies.Count > 0 && player.PlayerHealth > 0)
+            {
             Console.WriteLine("========================================");
             Console.WriteLine($"You have {player.PlayerHealth} HP left");
             Console.WriteLine($"You have {player.PlayerMana} Mana Left");
+            Console.WriteLine($"You are on floor {floorHandler.CurrentFloor}");
             Console.WriteLine("========================================");
             Console.WriteLine("Existing enemies:");
             List<int> invisibleEnemyIndexes = new List<int>();
@@ -126,7 +132,7 @@ static class Program
             Console.WriteLine("4. Save Game");
             Console.WriteLine("5. End The Game");
             Console.WriteLine("6. Show Inventory");
-            Console.Write("Choose 1-4:");
+            Console.Write("Choose 1-6:");
             string input = Console.ReadLine();
             
             Random random = new Random(); // används för att slumpa skada och häloregenerering
@@ -251,7 +257,7 @@ static class Program
                     Console.WriteLine($"***  {enemies[i].Name} died  ***");
                     Console.WriteLine("------------------------------------");
                     // ta bort fienden från listan utifrån dess index
-                    Console.WriteLine($"Attempting to drop loot from {enemies[i].Name}...");
+                    Console.WriteLine($"Attempting to drop loot from {enemies[i].Name}..."); // bara för att se att det funkar, tas bort sen
 
 
                     Weapon droppedLoot = enemies[i].DropLoot();
@@ -272,11 +278,15 @@ static class Program
                     // Därför måste vi minska i med 1 för att inte hoppa över en fiende
                     i--;
                     // Vi hoppar över resten av loopen och går till nästa iteration.
-                    continue;
+                   // continue; testar att ta bort den?
                 }
-                else if (enemies[i] is Shaman shaman)
+                else if (enemies[i] is Shaman shaman)// && enemies.Count > 1)
                 {
                     shaman.Heal(enemies);
+                }
+                else if (enemies[i] is Boss)
+                {
+                    player.TakeDamage(enemies[i].Attack());
                 }
                 else
                 {
@@ -288,6 +298,19 @@ static class Program
                     player.TakeDamage(enemies[i].Attack());
                 }
             }
+                if (enemies.Count == 0)
+                {
+                    if (floorHandler.CurrentFloor < 10)
+                    {
+                    Console.WriteLine("All enemies are defeated, Moving on to the next floor....");
+                    floorHandler.AdvanceFloor();
+                    }
+                    else
+                    {
+                        Console.WriteLine("--------You have cleared the Tutorial!--------");
+                        gameCompleted = true;
+                    }
+                }
 
             // ---------------------------------------------
             // Kontrollera om spelaren har dött, isf avsluta mainloopen
@@ -300,15 +323,19 @@ static class Program
                 break;
             }
 
-            else if (enemies.Count <= 0 && invisibleEnemyIndexes.Count <= 0)
+           /* else if (enemies.Count <= 0 && floorHandler.CurrentFloor == 10)
             {
                 Console.WriteLine("--------You have cleared the Tutorial!--------");
-            }
+            } */
             // Vänta på att användaren ska trycka på en tangent och rensa skärmen
             Console.ReadKey();
             Console.Clear();
         }
+        if (player.PlayerHealth <= 0)
+        {
         Console.WriteLine("*****  GAME OVER LOSER  *****");
         Console.ReadKey();
+        }
+    }
     }
 }

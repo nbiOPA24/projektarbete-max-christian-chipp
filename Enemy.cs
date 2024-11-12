@@ -51,6 +51,10 @@ namespace TutorialTheGame
         public virtual void Defend(double damage)
         {
                 double totalDamage = damage - Armor;
+                if (totalDamage < 0)
+                {
+                    totalDamage = 0;
+                }
                 System.Console.WriteLine($"{Name} takes {totalDamage} damage");
                 Console.WriteLine("========================================");
                 Console.WriteLine();

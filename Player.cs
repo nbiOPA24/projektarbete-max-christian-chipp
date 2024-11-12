@@ -27,7 +27,7 @@ namespace TutorialTheGame
             Name = name;
             PlayerStats = stats;
             PlayerHealth = PlayerStats.CalculateStamina(PlayerStats.Stamina, 100);
-            PlayerDamage = PlayerStats.CalculateStrength(PlayerStats.Strength, 20);
+            PlayerDamage = PlayerStats.CalculateStrength(PlayerStats.Strength, 2000);
             PlayerMana = PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 500);
             Armor = 0;
             shieldStrength = 0;

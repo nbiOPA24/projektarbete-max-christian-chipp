@@ -4,7 +4,7 @@ Spelaren får XP genom att besegra fiender och kan levla upp. Nivåerna påverka
 
 Spelaren kan använda olika vapen och spells för att slåss. spells använder mana.
 
-Vi som gör detta är Max, Christian och Chipp!
+Jag som gör detta är Max
 
 
 
