@@ -14,7 +14,7 @@ namespace TutorialTheGame
         public double PlayerHealth { get; set; }
         public double PlayerDamage { get; set; }
         public double PlayerMana { get; set; }
-        public int shieldStrength { get; set; }
+        public double shieldStrength { get; set; }
         public double Armor { get; set; }
         public Stats PlayerStats {get; set;}
         public List<Weapon> Inventory {get; set;}
@@ -44,6 +44,16 @@ namespace TutorialTheGame
                 Console.WriteLine($"{weapon.Name} - Damage: {weapon.Damage}, Type: {weapon.Type}, Rarity: {weapon.Rarity}");
             }
         }
+        public void EquipWeapon(Weapon weapon)
+        {
+            EquippedWeapon = weapon;
+            Console.WriteLine($"{Name} has equipped {weapon.Name}");
+        }
+        public void PickUpLoot(Weapon weapon)
+        {
+            Inventory.Add(weapon);
+            Console.WriteLine($"{Name} has picked up an {weapon.Rarity} weapon: {weapon.Name} with {weapon.Damage} damage, Amazing!");
+        }
         public void AddExperience(int xp)
         {
             Experience += xp;
@@ -67,27 +77,22 @@ namespace TutorialTheGame
         }
 
        
-        public void EquipWeapon(Weapon weapon)
-        {
-            EquippedWeapon = weapon;
-            Console.WriteLine($"{Name} has equipped {weapon.Name}");
-        }
-        public void TakeDamage(int damage)
+        public void TakeDamage(double damage)
         {
             //damage = Enemy.enemies[i].attack();
             
             // lägga till bool isShieldBroken så vi inte får samma meddelande hela tiden.
             if (shieldStrength > 0)
             {
-                int shieldAbsorbed = Math.Min(damage, shieldStrength);
+                double shieldAbsorbed = Math.Min(damage, shieldStrength);
                 damage -= shieldAbsorbed;
                 shieldStrength -= shieldAbsorbed;
                 Console.WriteLine($"Your ice shield absorbed {shieldAbsorbed} damage! remaining shield: {shieldStrength}");
                
-            }
-            else if (damage > 0)
-            {
-                Console.WriteLine($"Ice shield is broken you take {damage} damage");
+                if (shieldStrength <= 0)
+                {
+                    Console.WriteLine($"Ice shield is broken you take {damage} damage");
+                }
             }
            
             double totalDamage = damage - Armor;

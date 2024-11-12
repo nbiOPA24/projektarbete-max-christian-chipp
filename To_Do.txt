@@ -13,11 +13,12 @@
 						* UI
 						*** Character klass
 						* Välja start ras med försatta stat poäng
-						*** Character spells bara bug fixes med osynliga och spöket
+						*** Character spells    Eventuell level restriction / unlock
 						*** Sparning med Json bara hantera lite buggar kvar
-						* Loot
-						* Vapen
-						* Inventory
+						** Loot
+						** Vapen  lägga till mer vapen
+						** Inventory
+						* Lägga till Warrior attacker också
 						* Shop / eventuell guld? potions?
 						* eventuell storage manager(bank) som har alla vapen
 						
