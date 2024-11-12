@@ -15,10 +15,10 @@ namespace TutorialTheGame
 
         public Loot()
         {
-            Weapons = new List<Weapon> // ska såklart ha stats
+            Weapons = new List<Weapon> // ska såklart ha stats, itemlevel?
             {
-              new Weapon("Sword of power", 15, "Sword", "Normal"), 
-              new Weapon("Axe of fury", 20, "Axe", "Normal") 
+              new Weapon("Sword of power", 15, Weapon.eWeaponType.Sword, "Normal"), 
+              new Weapon("Axe of fury", 20, Weapon.eWeaponType.Axe, "Normal") 
             };
             
         }

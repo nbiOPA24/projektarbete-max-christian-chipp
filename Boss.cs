@@ -27,23 +27,20 @@ namespace TutorialTheGame
 
             int damage;
             Random random = new Random();
-            damage = BaseDamage + random.Next(0, 100);
             if (Rage >= 110)
             {
-                damage = random.Next(75, 175);
-                Console.WriteLine($"{Name}You spin me right round, Baby, right round like barb in d2 swinging his axe, right round {damage}");
-                Console.WriteLine("--------------------");
-
-                Rage += random.Next(25, 50);
+                damage = random.Next(100, 175);
+                Console.WriteLine($"{Name} enters a furious spin, dealing {damage} damage!");
                 Rage -= 110;
             }
             else
             {
                 damage = BaseDamage + random.Next(20, 65);
-                Console.WriteLine($"{Name} Stay Focus, Pointer hits you in the face, point taken {damage}");
-                Console.WriteLine("((==))-------------------*   (-.*)");
+                Console.WriteLine($"{Name} strikes you with his axe, dealing {damage} damage!");
 
             }
+            Rage += random.Next(25, 50);
+            Console.WriteLine("--------------------");
             return damage;
 
         }

@@ -16,7 +16,7 @@
 						*** Character spells    Eventuell level restriction / unlock
 						*** Sparning med Json bara hantera lite buggar kvar
 						** Loot
-						** Vapen  lägga till mer vapen
+						** Vapen  lägga till mer vapen och även stats på vapen? lite mindre chans att droppa
 						** Inventory
 						* Lägga till Warrior attacker också
 						* Shop / eventuell guld? potions?

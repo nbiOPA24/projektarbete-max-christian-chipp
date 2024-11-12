@@ -12,15 +12,23 @@ namespace TutorialTheGame
     {
         public string Name {get; set;}
         public double Damage {get; set;}
-        public string Type {get; set;}
-        public string Rarity {get; set;}  // tänker att vi kanske lägger till rarity
+        public eWeaponType Type {get; set;}
+        public string Rarity {get; set;}  // tänker att vi kanske lägger till rarity   Lägga till stats?
 
-        public Weapon(string name, double damage, string type, string rarity)
+        public Weapon(string name, double damage, eWeaponType type, string rarity)
         {
             Name = name;
             Damage = damage;
             Type = type;
             Rarity = rarity;
+
+        }
+        public enum eWeaponType
+        {
+            Sword,
+            Axe,
+            Staff,
+
         }
     }
 }

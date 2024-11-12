@@ -29,6 +29,15 @@ using System.Security.Cryptography.X509Certificates;
 // Total damage display
 // Race/name/Weapon väljs som start
 // En ide, lägga till raser, raser har olika allokerade stats som bas, när sedan dingar i spelet så får man statPoints att lägga ut.
+
+
+// Frame symbols saved for later (possible) use:
+        // ╔══╦══╗  ╔═════╗  ╔══╤══╗
+        // ║  ║  ║  ╠═════╣  ║  |  ║
+        // ╚══╩══╝  ╚═════╝  ╚══╧══╝
+        // ╔╗
+        // ║║           läggat ill threadsleep på enemy attacker
+        // ╚╝
 static class Program
 {
     static void Main(string[] args)
@@ -62,8 +71,8 @@ static class Program
         enemies.Add(new Assassin("Shadow Goblin", 10));
         //enemies.Add(new Mage("Human Cultist"));
        // enemies.Add(new Assassin("Shadow Goblin"));
-        enemies.Add(new Warrior("Orc Warrior"));
-        enemies.Add(new Shaman("Hobgoblin shaman"));
+        //enemies.Add(new Warrior("Orc Warrior"));
+        //enemies.Add(new Shaman("Hobgoblin shaman"));
                 
        /* foreach (var enemy in enemies)  // TEST FÖR ATT SE ATT VAPEN FUNGERAR 
         {
