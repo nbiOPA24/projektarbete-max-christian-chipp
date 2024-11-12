@@ -5,12 +5,12 @@ namespace TutorialTheGame
 {
     public class FloorHandler
     {
-        public int CurrentFloor {get; set;} = 1;
+        public int CurrentFloor {get; set;} // = 1;
         public Random random = new Random();
 
         public FloorHandler()
         {
-            CurrentFloor = 1;
+            CurrentFloor = 10;
         }
         public void AdvanceFloor()
         {
@@ -20,12 +20,18 @@ namespace TutorialTheGame
         public List<Enemy> CreateEnemies()
         {
             List<Enemy> enemies = new List<Enemy>();
-            int numberOfEnemies = random.Next(2,3 + CurrentFloor);
-            
-            for (int i = 0; i < numberOfEnemies; i++)
+            if (CurrentFloor == 10)
             {
-                Enemy enemy = CreateEnemyForFloor();
-                enemies.Add(enemy);
+                enemies.Add(new Boss("Trangius"));
+            }
+            else
+            {
+                int numberOfEnemies = random.Next(1,2 + CurrentFloor);
+                for (int i = 0; i < numberOfEnemies; i++)
+                {
+                    Enemy enemy = CreateEnemyForFloor();
+                    enemies.Add(enemy);
+                }
             }
             return enemies;
         }

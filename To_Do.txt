@@ -8,7 +8,7 @@
 						*** Enemy Boss  Chipp Klar? bara boolen kvar?
 						* Exp system
 						*** Stat system  Klar
-						* Lägga till floors
+						*** Lägga till floors
 						* HP bar med färg
 						* UI
 						*** Character klass

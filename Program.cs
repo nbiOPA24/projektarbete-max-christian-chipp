@@ -48,6 +48,7 @@ static class Program
         Player player = new Player("BitchAss", playerStats);
         CharacterSpells spells = new CharacterSpells();
         FloorHandler floorHandler = new FloorHandler();
+        bool gameCompleted = false;
 
         Console.WriteLine("Do you want to load a saved game? (y/n)");
         string loadInput = Console.ReadLine().ToLower();
@@ -65,16 +66,6 @@ static class Program
                 Console.WriteLine("Failed to load game. Starting a new game.");
             }
         }
-       
-
-        // skapa en lista med fiender
-       // List<Enemy> enemies = new List<Enemy>();
-        //enemies.Add(new Mage("Human Cultist", 10));
-        //enemies.Add(new Assassin("Shadow Goblin", 10));
-        //enemies.Add(new Mage("Human Cultist"));
-       // enemies.Add(new Assassin("Shadow Goblin"));
-        //enemies.Add(new Warrior("Orc Warrior"));
-        //enemies.Add(new Shaman("Hobgoblin shaman"));
                 
        /* foreach (var enemy in enemies)  // TEST FÖR ATT SE ATT VAPEN FUNGERAR 
         {
@@ -107,7 +98,7 @@ static class Program
         } */ 
 
         // spelloop - spelet körs så länge spelaren har hälsa kvar
-        while (player.PlayerHealth > 0)
+        while (player.PlayerHealth > 0 && !gameCompleted)
         {
             List<Enemy> enemies = floorHandler.CreateEnemies();
             // Skriv ut en meny
@@ -289,9 +280,13 @@ static class Program
                     // Vi hoppar över resten av loopen och går till nästa iteration.
                    // continue; testar att ta bort den?
                 }
-                else if (enemies[i] is Shaman shaman)
+                else if (enemies[i] is Shaman shaman)// && enemies.Count > 1)
                 {
                     shaman.Heal(enemies);
+                }
+                else if (enemies[i] is Boss)
+                {
+                    player.TakeDamage(enemies[i].Attack());
                 }
                 else
                 {
@@ -305,9 +300,16 @@ static class Program
             }
                 if (enemies.Count == 0)
                 {
+                    if (floorHandler.CurrentFloor < 10)
+                    {
                     Console.WriteLine("All enemies are defeated, Moving on to the next floor....");
                     floorHandler.AdvanceFloor();
-                    break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("--------You have cleared the Tutorial!--------");
+                        gameCompleted = true;
+                    }
                 }
 
             // ---------------------------------------------
@@ -321,10 +323,10 @@ static class Program
                 break;
             }
 
-            else if (enemies.Count <= 0 && floorHandler.CurrentFloor == 10)
+           /* else if (enemies.Count <= 0 && floorHandler.CurrentFloor == 10)
             {
                 Console.WriteLine("--------You have cleared the Tutorial!--------");
-            }
+            } */
             // Vänta på att användaren ska trycka på en tangent och rensa skärmen
             Console.ReadKey();
             Console.Clear();

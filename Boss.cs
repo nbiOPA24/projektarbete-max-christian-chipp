@@ -10,13 +10,13 @@ namespace TutorialTheGame
     {
         public int Rage { get; set; }
         bool isGiant;
+        Random random = new Random();
         public Boss(string name) : base(name, 25)
         {
-            Random random = new Random();
             Name = name;
             Health = 500 + random.Next(0, 100);
             BaseDamage = 50;
-            Armor = 100;
+            Armor = 30;
             Rage = 0;
             isGiant = true;  // vad är denna till för ? framtid tanke?
         }
@@ -26,20 +26,19 @@ namespace TutorialTheGame
         {
 
             int damage;
-            Random random = new Random();
             if (Rage >= 110)
             {
                 damage = random.Next(100, 175);
                 Console.WriteLine($"{Name} enters a furious spin, dealing {damage} damage!");
-                Rage -= 110;
+                Rage = 0;
             }
             else
             {
                 damage = BaseDamage + random.Next(20, 65);
                 Console.WriteLine($"{Name} strikes you with his axe, dealing {damage} damage!");
+                Rage += random.Next(25, 50);
 
             }
-            Rage += random.Next(25, 50);
             Console.WriteLine("--------------------");
             return damage;
 
