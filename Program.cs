@@ -39,7 +39,7 @@ using System.Transactions;
 // ╔╗
 // ║║           läggat ill threadsleep på enemy attacker
 // ╚╝
-static class Program
+static class Program //skriva metoder på menyn istället så det inte blir stökigt, samma med ui
 {
     static void Main(string[] args)
     {
@@ -104,10 +104,11 @@ static class Program
             // Skriv ut en meny
             while (enemies.Count > 0 && player.PlayerHealth > 0)
             {
-            Console.WriteLine("========================================");
+            Console.WriteLine("========================================");  // vill göra detta till en metod istället för write line.
             Console.WriteLine($"You have {player.PlayerHealth} HP left");
             Console.WriteLine($"You have {player.PlayerMana} Mana Left");
             Console.WriteLine($"You are on floor {floorHandler.CurrentFloor}");
+            Console.WriteLine($"You have {player.Experience} xp");   // sätta in en character display kanske istället? eller visa staten med inventoryt?
             Console.WriteLine("========================================");
             Console.WriteLine("Existing enemies:");
             List<int> invisibleEnemyIndexes = new List<int>();
@@ -169,7 +170,7 @@ static class Program
                     Console.WriteLine("5. Ice Shield");
                     Console.Write("Choose 1-5: ");
                     string spellInput = Console.ReadLine();
-                    if (spellInput == "1" || spellInput == "2" || spellInput == "3") // Kontrollera om det är en single-target spell
+                    if (spellInput == "1" || spellInput == "2" || spellInput == "3") // Kontrollera om det är en single-target spell   generelisera spellsen så man kan lägga till mer,  lista på current spells // kompisiton
                         {
                             Console.Write("Choose an enemy to target with the spell: ");
                             enemyIndex = int.Parse(Console.ReadLine()) - 1;
@@ -259,7 +260,7 @@ static class Program
                     // ta bort fienden från listan utifrån dess index
                     Console.WriteLine($"Attempting to drop loot from {enemies[i].Name}..."); // bara för att se att det funkar, tas bort sen
 
-
+                    player.AddExperience(enemies[i].ExperienceValue); // ny metod för att lägga på xp, ska eventuellt flyttas men första test
                     Weapon droppedLoot = enemies[i].DropLoot();
                     if (droppedLoot != null)
                     {
@@ -333,8 +334,8 @@ static class Program
         }
         if (player.PlayerHealth <= 0)
         {
-        Console.WriteLine("*****  GAME OVER LOSER  *****");
-        Console.ReadKey();
+            Console.WriteLine("*****  GAME OVER LOSER  *****");
+            Console.ReadKey();
         }
     }
     }

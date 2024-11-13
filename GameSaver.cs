@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace TutorialTheGame
 {
-    public class GameData
+    public class GameData  //kolla json så enemies sparar sig, lägga till enemies så dom laddas in istället för att ha kod?
     {
         public string PlayerName { get; set; }
         public double PlayerHealth { get; set; }

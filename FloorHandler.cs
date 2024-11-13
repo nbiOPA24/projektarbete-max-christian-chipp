@@ -10,7 +10,7 @@ namespace TutorialTheGame
 
         public FloorHandler()
         {
-            CurrentFloor = 10;
+            CurrentFloor = 7;
         }
         public void AdvanceFloor()
         {
@@ -107,4 +107,5 @@ namespace TutorialTheGame
             }
         }
     }
-}
+}  // istället för olika metoder, lite mer generell, lite kortare, en enda metod? en lista med alla tänkbara fienderna, i listan finns t.ex dom finns på level 1,2 etc, max / min level,
+// inte så många if satser, utan som mer en databas med olika enemies som kan slumpa fram, t.ex 1-2 enemies från level 1-4, slumpar ut dom som har minimum level 2 och max floor typ 4, (inklusive)
