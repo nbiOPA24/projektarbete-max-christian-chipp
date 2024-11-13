@@ -2,12 +2,12 @@
 
 ================================================== To do ==================================================================
 
-						*** Enemy   XP och Level
+						** Enemy   XP och Level
 						*** Enemies     Lägga till xp reward?
 						* ta bort osynliga fienden från listan
 						*** Enemy Boss  Chipp Klar? bara boolen kvar?
 						* Exp system
-						*** Stat system  Klar
+						*** Stat system  Klar, adda stats
 						*** Lägga till floors
 						* HP bar med färg
 						* UI
@@ -36,3 +36,5 @@ weapon experience?
 scenarios ?? inlevelse, berättelse när du går upp i level
 olika difficulties ?
 mini boss som har random chans att spawna?
+
+UI uppdelning och logic, sätta det i metoder ordentligt istället för massa write lines, 

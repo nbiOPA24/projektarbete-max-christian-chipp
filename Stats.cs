@@ -84,7 +84,7 @@ namespace TutorialTheGame
                 Console.Write("Enter how many points to allocate: ");
                 int points;
 
-                // kontroll för att distrubutera poängen
+                // kontroll för att lägga till stats
                 if (int.TryParse(Console.ReadLine(), out points) && points > 0 && points <= pointsAvailable)
                 {
                     switch (choice)

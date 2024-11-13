@@ -65,14 +65,14 @@ namespace TutorialTheGame
 
         private int GetExperienceForNextLevel()
         {
-            return Level * 100; // exempel: 100 XP per level
+            return Level * 100; // första test med 100
         }
 
         private void LevelUp()
         {
             Level++;
-            Experience = 0;
-            PlayerStats.IncreaseStats(5); // Exempel på att ge 5 extra stat-poäng
+            Experience = 0;  // kanske ha -= istället med metoden ovanför ?
+            PlayerStats.IncreaseStats(5); // testar med att ge 5 stat points
             Console.WriteLine($"Congratulations! {Name} leveled up to level {Level}!");
         }
 
