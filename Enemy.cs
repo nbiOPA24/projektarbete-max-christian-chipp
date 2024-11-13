@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TutorialTheGame
-{
+namespace TutorialTheGame       // to do, defend för arcane damage? med tanke på att den ska ignorera armor.
+{   
     public class Enemy
     {
         // Alla fiender ska ha detta gemensamt:
