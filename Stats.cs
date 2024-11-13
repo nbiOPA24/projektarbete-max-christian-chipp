@@ -28,33 +28,11 @@ namespace TutorialTheGame
             Stamina = stamina * 0.3;
             Intelligence = intelligence * 0.3;
         }
-
-        /*public Stats(string name, double health, int baseDamage, int armor, int level, int experience, double strength, double stamina, double intelligence)
-        {
-            Name = name;
-            Health = health;
-            BaseDamage = baseDamage;
-            Armor = armor;
-            Level = level;
-            Experience = experience;
-            Strength = strength * 0.25;
-            Stamina = stamina * 0.3;
-            Intelligence = intelligence * 0.3;
-        }
-        */
-        /*public Stats(double strength, double stamina, double intelligence)
-        {
-            Strength = strength * 0.25;
-            Stamina = stamina * 0.3;
-            Intelligence = intelligence * 0.3;
-        } */
-        public double CalculateStrength(double strength, double playerDamage) 
+        public double CalculateStrength(double strength, double playerDamage) // kanske försöka streamlina lite och göra en metod om det går? maybe baby
         {
            
             playerDamage = playerDamage * strength;
-        // playerHealth = playerHealth * Stamina;
-        // playerMana = playerMana * intelligence;
-        return playerDamage;// + playerHealth + playerMana;
+            return playerDamage;
 
 
         }

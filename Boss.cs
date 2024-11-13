@@ -18,7 +18,7 @@ namespace TutorialTheGame
             BaseDamage = 50;
             Armor = 30;
             Rage = 0;
-            isGiant = true;  // vad är denna till för ? framtid tanke?
+            isGiant = true;  // vad är denna till för ? framtid tanke? kanske öka defense/armor när den är aktiv, men är det värt det?
         }
 
 

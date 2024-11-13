@@ -66,7 +66,6 @@ namespace TutorialTheGame
                 Console.WriteLine("---------------------------");
                 player.PlayerMana -= manaCost;
                 return damage;
-                //kanske lägga till en stun effekt?
             }
             return 0;
 
@@ -88,7 +87,6 @@ namespace TutorialTheGame
                     
                 }
             }
-           // return damage;
 
         }
         public void IceShield(Player player)

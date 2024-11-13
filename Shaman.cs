@@ -27,14 +27,10 @@ namespace TutorialTheGame
             // ExpReward = 5; // Får bestämma :D
         }
 
-        // Magikern attackerar
         // return value - denna metod returnerar ett heltal som är skadan som magikern gör
-       // public override int Attack()
         public int Heal(List<Enemy> enemies)
         {
-            int Heal; // hur mycket skada ska magikern göra?
-
-            // om magikern har mer än 10 mana, kan den kasta en eldboll
+            int Heal; 
             // TODO: Lägg till fler attacker som vi slumpar emellan
             if (Mana > 10)
             {

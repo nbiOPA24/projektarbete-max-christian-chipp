@@ -13,8 +13,7 @@ namespace TutorialTheGame
         public double Health { get; set; }
         public int BaseDamage { get; set; }
         public int Armor { get; set; }
-       // public int Experience { get; set; } 
-        public double Level { get; set; }
+        public double Level { get; set; }  // lägga till så levels ökar kanske, om vi inte kör krister lösning med json?
         public int ExperienceValue {get ; set;}
         public Loot loot;
         public List<Weapon> Lootable {get ; set;}
