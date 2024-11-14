@@ -3,19 +3,19 @@
 ================================================== To do ==================================================================
 
 						** Enemy  Level
-						*** Enemies  ------------
-						*** Enemy Boss  bara boolen kvar?
+						*** Enemies  ------------ Göra till json?
+						*** Enemy Boss  bara boolen kvar? 
 						*** Exp system ---------
  						*** Stat system  ---------
 						*** Lägga till floors eventuell bug med count.floors?
 						*** Character klass ------
 						** Character spells    Eventuell level restriction / unlock
-						** Sparning med Json bara hantera lite buggar kvar
+						** Sparning med Json bara hantera lite buggar kvar, lägga till enemies med en array
 						** Loot
 						** Vapen  lägga till mer vapen och även stats på vapen? lite mindre chans att droppa
 						** Inventory  fixa equip metoden ordentligt
 						* ta bort osynliga fienden från listan
-						* UI
+						** UI  lägga till lite färg kanske, uppdatera alla linjer med metod istället, lägga switch till en metod
 						* Lägga till Warrior attacker också
 						* HP bar med färg
 						* Shop / eventuell guld? potions?

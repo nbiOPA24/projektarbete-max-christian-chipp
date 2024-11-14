@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TutorialTheGame       // to do, defend för arcane damage? med tanke på att den ska ignorera armor.
 {   
-    public class Enemy
+    public abstract class Enemy  //abstrakt klass istället?
     {
         // Alla fiender ska ha detta gemensamt:
         public string Name { get; set; }
@@ -15,9 +15,9 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
         public int Armor { get; set; }
         public double Level { get; set; }  // lägga till så levels ökar kanske, om vi inte kör krister lösning med json?
         public int ExperienceValue {get ; set;}
-        public Loot loot;
-        public List<Weapon> Lootable {get ; set;}
-
+        public Loot loot {get; init;} // init betyder att man inte sätta / ge mer loot efter man skapat fienden, init står för intialisering så den sätter värdet bara i start
+        public List<Weapon> Lootable {get ; set;} // vet inte riktigt vad jag tänker här, varför har jag lagt till denna nu igen
+        // random  kanske proteced, alla som ärver den kan inte se den.
 
         public Enemy(string name, int xp)
         {
@@ -41,7 +41,7 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
         }
 
             // Fienden attackerar.
-        public virtual int Attack()
+        public virtual int Attack()  //kanske en default attack
         {
                 return 0;
         }
@@ -54,7 +54,7 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
                 {
                     totalDamage = 0;
                 }
-                System.Console.WriteLine($"{Name} takes {totalDamage} damage");
+                System.Console.WriteLine($"{Name} takes {totalDamage} damage"); // göra till en metod def om vi lägger till arcaneDefend
                 Console.WriteLine("========================================");
                 Console.WriteLine();
                 Health -= totalDamage;

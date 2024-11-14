@@ -8,9 +8,9 @@ namespace TutorialTheGame
 {
     class Boss : Enemy
     {
-        public int Rage { get; set; }
+        private int Rage { get; set; }
         bool isGiant;
-        Random random = new Random();
+        private Random random = new Random();
         public Boss(string name) : base(name, 25)
         {
             Name = name;

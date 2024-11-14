@@ -29,7 +29,7 @@ namespace TutorialTheGame
             int index = random.Next(Weapons.Count);
             return Weapons[index];
         } 
-        public void AddWeapon(Weapon weapon)
+        public void AddWeapon(Weapon weapon) //implementera denna, kommer inte ihåg just nu varför jag gjort den
         {
             Weapons.Add(weapon);
         }
