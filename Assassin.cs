@@ -14,7 +14,7 @@ namespace TutorialTheGame
         private Random random = new Random();
 
         // Konstruktor
-        public Assassin(string name, int xp) : base(name, 10)
+        public Assassin(string name, int xp) : base(name, xp)
         {
             Name = name;
             Health = 35 + random.Next(0, 30);
@@ -22,7 +22,7 @@ namespace TutorialTheGame
             Armor = 15;
             isVisible = false; // TODO: random på/av???
            // xp = 5; //Får bestämma ;) får ha det i konstruktorn istället
-            Level = Level * 0.3;
+            //Level = Level * 0.3;
             
              
         }

@@ -11,7 +11,7 @@ namespace TutorialTheGame
     { 
         public int Rage { get; set; }
 
-        public Warrior(string name, int xp) : base(name, 10)
+        public Warrior(string name, int xp) : base(name, xp)
         {
 
             Random random = new Random();
@@ -22,7 +22,7 @@ namespace TutorialTheGame
             Rage = 0;
             //Experience = 5;
             //ExpReward = 5; // får bestämma ;)
-            Level = Level * 0.3;
+            //Level = Level * 0.3;
         }
 
         public override int Attack()

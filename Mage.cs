@@ -13,7 +13,7 @@ namespace TutorialTheGame
         private Random random = new Random();
 
         // konstruktor för att skapa magikern:
-        public Mage(string name, int xp) : base(name, 10)
+        public Mage(string name, int xp) : base(name, xp)
         {
             BaseDamage = 10;
             Health = 40 + random.Next(0, 20);

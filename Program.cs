@@ -51,29 +51,29 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
         while (player.PlayerHealth > 0 && !gameCompleted) 
         {
             List<Enemy> enemies = floorHandler.CreateEnemies(); // --- sätt en ordentlig kommentar när jag inte är trött
-            // Skriv ut en meny
+            
             while (enemies.Count > 0 && player.PlayerHealth > 0)  // spelloop, körs så länge det finns enemies och man har hp kvar
             {
                 Ui.DisplayInfo(player, floorHandler);  // visar hp, mana, floor och xp
-                Ui.DisplayEnemies(enemies);
+                Ui.DisplayEnemies(enemies); // visar alla enemies
                 Ui.MenuOptions(); // Val mellan 1-6 för attack, heal, spell, save, quit, inventory
 
-                action.PlayerAction(player, enemies);
-                action.EnemiesTurn(player, enemies);
+                action.PlayerAction(player, enemies); // man gör sin tur, attack/heal/spell
+                action.EnemiesAction(player, enemies); // enemeies attackerar
 
-                    if (enemies.Count == 0)
+                if (enemies.Count == 0)
+                {
+                    if (floorHandler.CurrentFloor < 10)
                     {
-                        if (floorHandler.CurrentFloor < 10)
-                        {
-                            floorHandler.AdvanceFloor();
-                        }
-                        else
-                        {
-                            Ui.GameClearMessage();
-                            Console.ReadKey();
-                            gameCompleted = true;
-                        }
+                        floorHandler.AdvanceFloor();
                     }
+                    else
+                    {
+                        Ui.GameClearMessage();
+                        Console.ReadKey();
+                        gameCompleted = true;
+                    }
+                }
 
                 // Kontrollera om spelaren har dött, isf avsluta mainloopen
                 if (player.PlayerHealth <= 0)
@@ -84,7 +84,7 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
                 }
                 // Vänta på att användaren ska trycka på en tangent och rensa skärmen
                 //Finish:;
-                //Console.ReadKey();
+                Console.ReadKey();
                 Console.Clear();
             }
         }
