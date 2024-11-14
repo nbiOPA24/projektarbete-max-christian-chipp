@@ -11,12 +11,12 @@ namespace TutorialTheGame
         // Förutom de egenskaper som finns i basklassen Enemy, har lönnmördaren möjligheten
         // att vara osynlig
         bool isVisible;
+        private Random random = new Random();
 
         // Konstruktor
         public Assassin(string name, int xp) : base(name, 10)
         {
             Name = name;
-            Random random = new Random();
             Health = 35 + random.Next(0, 30);
             BaseDamage = 20;
             Armor = 15;
@@ -41,7 +41,7 @@ namespace TutorialTheGame
         {
             int damage;
             // if it is visible, it will attack
-            Random random = new Random();
+            //Random random = new Random();
 
             if (isVisible)
             {

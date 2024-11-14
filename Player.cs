@@ -63,7 +63,7 @@ namespace TutorialTheGame
             }
         }
 
-        private int GetExperienceForNextLevel()
+        public int GetExperienceForNextLevel()
         {
             return Level * 100; // första test med 100
         }

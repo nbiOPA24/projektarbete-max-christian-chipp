@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 namespace TutorialTheGame
 {
-    class Ui
+    public static class Ui
     {
         //Enemy enemy = new Enemy();
-        public void MenuOptions()
+        public static void MenuOptions()
         {
             Console.WriteLine("Your options:");
             Console.WriteLine("1. Attack");
@@ -16,7 +17,7 @@ namespace TutorialTheGame
             Console.Write("Choose 1-6:");
            // string input = Console.ReadLine();
         }
-        public void SpellOptions()
+        public static void SpellOptions()
         {
             Console.WriteLine("Choose a spell:");
             Console.WriteLine("1. Fireball");
@@ -26,48 +27,59 @@ namespace TutorialTheGame
             Console.WriteLine("5. Ice Shield");
             Console.Write("Choose 1-5: ");
         }
-        public void DisplayInfo(Player player, FloorHandler floorHandler)
+        public static void DisplayInfo(Player player, FloorHandler floorHandler)
         {
             BigLine();
             Console.WriteLine($"You have {player.PlayerHealth} HP left");
             Console.WriteLine($"You have {player.PlayerMana} Mana Left");
             Console.WriteLine($"You are on floor {floorHandler.CurrentFloor}");
-            Console.WriteLine($"You have {player.Experience} xp");   // sätta in en character display kanske istället? eller visa staten med inventoryt?
+            Console.WriteLine($"You have {player.Experience} / {player.GetExperienceForNextLevel()}");   // sätta in en character display kanske istället? eller visa staten med inventoryt?
             BigLine();
         }
-        public void ChooseTarget()
+        public static void DisplayEnemies(List<Enemy> enemies)
+        {
+            Console.WriteLine("Existing enemies:");
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].GetInfo() != null) // kontrollerar så att fienden är synlig
+                {
+                    Console.WriteLine($"{(i + 1)}.  {enemies[i].GetInfo()}"); // skriv ut den synliga fienden
+                }
+            }
+        }
+        public static void ChooseTarget()
         {
             Console.Write("Who do you want to attack:");
         }
-        public void SmallLine()
+        public static void SmallLine()
         {
             Console.WriteLine("---------------------------");
         }
-        public void BigLine()
+        public static void BigLine()
         {
             Console.WriteLine("========================================");
         }
-        public void DeathMessage()
+        public static void DeathMessage()
         {
             SmallLine();
             Console.WriteLine("***** You died try again *****");
             SmallLine();
         }
-        public void GameClearMessage()
+        public static void GameClearMessage()
         {
             Console.WriteLine("--------You have cleared the Tutorial!--------");
         }
-        public void EnemyDiedMessage(Enemy enemy)
+        public static void EnemyDiedMessage(Enemy enemy)
         {
             SmallLine();
             Console.WriteLine($"***  {enemy.Name} died  ***");
             SmallLine();
         }
-        public void InvalidInput()
+        public static void InvalidInput()
         {
             Console.WriteLine("Invalid input, please try again");
         }
-        public void InvalidTarget()
+        public static void InvalidTarget()
         {
             Console.WriteLine("There was no enemy to attack, you strike air");
         }

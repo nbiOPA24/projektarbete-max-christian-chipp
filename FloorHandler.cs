@@ -6,7 +6,7 @@ namespace TutorialTheGame
     public class FloorHandler
     {
         public int CurrentFloor {get; set;} // = 1;
-        public Random random = new Random();
+        private Random random = new Random();
 
         public FloorHandler()
         {
@@ -64,7 +64,7 @@ namespace TutorialTheGame
                 return new Assassin("Shadow Assasin", 20);
             }
         }
-        public Enemy CreateHighLevelEnemy()
+        public Enemy CreateHighLevelEnemy()  //switch istället, kanske nya switch med lambda
         {
             int type = random.Next(4);
 
@@ -107,5 +107,9 @@ namespace TutorialTheGame
             }
         }
     }
-}  // istället för olika metoder, lite mer generell, lite kortare, en enda metod? en lista med alla tänkbara fienderna, i listan finns t.ex dom finns på level 1,2 etc, max / min level,
-// inte så många if satser, utan som mer en databas med olika enemies som kan slumpa fram, t.ex 1-2 enemies från level 1-4, slumpar ut dom som har minimum level 2 och max floor typ 4, (inklusive)
+}  // istället för olika metoder, lite mer generell, lite kortare, en enda metod? en lista med alla tänkbara fienderna,
+// i listan finns t.ex dom finns på level 1,2 etc, max / min level,
+// inte så många if satser, utan som mer en databas med olika enemies som kan slumpa fram, t.ex 1-2 enemies från level 1-4, 
+//slumpar ut dom som har minimum level 2 och max floor typ 4, (inklusive)
+
+// generisk metod, polymorfism?

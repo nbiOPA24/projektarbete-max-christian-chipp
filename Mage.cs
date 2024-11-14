@@ -10,16 +10,17 @@ namespace TutorialTheGame
     {
         // Egenskaper
         public int Mana { get; set; }
+        private Random random = new Random();
 
         // konstruktor för att skapa magikern:
         public Mage(string name, int xp) : base(name, 10)
         {
             BaseDamage = 10;
-            Random random = new Random();
             Health = 40 + random.Next(0, 20);
             Mana = 20 + random.Next(0, 80);
             Armor = 5;
             Name = name;
+
             //Experience = 5;  // Får bestämma ;)
         }
 
@@ -33,7 +34,6 @@ namespace TutorialTheGame
             // TODO: Lägg till fler attacker som vi slumpar emellan
             if (Mana > 10)
             {
-                Random random = new Random();
                 damage = BaseDamage + random.Next(0, 30);
                 Console.WriteLine($"{Name} hurls a fireball at you for {damage} damage");
                 Console.WriteLine("---------------------------");

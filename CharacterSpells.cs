@@ -10,8 +10,8 @@ namespace TutorialTheGame
 {
     class CharacterSpells
     {
-        // kanske ha heal här med som en vanlig spell??
-        private static Random random = new Random();
+        // kanske ha heal här med som en vanlig spell?? sätta level requirements
+        private Random random = new Random();
         public bool HasEnoughMana(Player player, int manaCost)
         {
             if (player.PlayerMana >= manaCost) 
@@ -38,7 +38,7 @@ namespace TutorialTheGame
             return 0;
         }
         public double LightningStrike(Player player)
-        {  //A powerful spell that strikes an enemy with lightning, with a chance to stun.
+        {  //A powerful spell that strikes an enemy with lightning
             int BaseDamage = 30;
             int manaCost = 25;
 
@@ -55,7 +55,7 @@ namespace TutorialTheGame
             return 0;
         }
         public double ArcaneBlast(Player player)
-        {  // A focused blast of raw arcane energy that ignores armor and shields.
+        {  // A focused blast of raw arcane energy that ignores armor and shields. göra om så den ignorerar armor.
             int BaseDamage = 40;
             int manaCost = 30;
 
@@ -71,7 +71,7 @@ namespace TutorialTheGame
 
         }
         public void PoisonCloud(List<Enemy> enemies, Player player)
-        {  //  summons a cloud of poisonous gas, dealing damage over time to all enemies
+        {  //  summons a cloud of poisonous gas, dealing damage to all enemies
             int BaseDamage = 10;
             int manaCost = 15;
 
@@ -82,7 +82,7 @@ namespace TutorialTheGame
                 {
                     double damage = BaseDamage * player.PlayerStats.Intelligence + random.Next(0, 30);
                     enemy.Health -= damage; 
-                    Console.WriteLine($"The area erupts with poison, damaging every enemy for {damage}!");
+                    Console.WriteLine($"The area erupts with poison, damaging every enemy for {damage}!"); // TODO skriva ut vilken enemy som tar skada
                     Console.WriteLine("---------------------------");
                     
                 }
@@ -90,7 +90,7 @@ namespace TutorialTheGame
 
         }
         public void IceShield(Player player)
-        {  //  Creates a shield of ice around the player, reducing incoming damage for a few turns
+        {  //  Creates a shield of ice around the player, reducing incoming damage
             int baseShieldStrength = 40;
             int manaCost = 20;
 

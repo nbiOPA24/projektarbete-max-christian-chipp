@@ -7,17 +7,8 @@ using System.Threading.Tasks;
 
 namespace TutorialTheGame
 {
-    // TODO, göra playermana, sätta mana cost på heal, få increasestats med stamina och intelligence.
-
     public class Stats
     {
-
-       /* public string Name { get; set; }
-        public double Health { get; set; }
-        public int BaseDamage { get; set; }
-        public int Armor { get; set; }
-        public int Experience { get; set; }
-        public int Level {get ; set;} */
         public double Strength { get; set; }
         public double Stamina { get; set; }
         public double Intelligence { get; set; }
@@ -52,7 +43,7 @@ namespace TutorialTheGame
         {
             while (pointsAvailable > 0)
             {
-                Console.WriteLine($"You have {pointsAvailable} stat points to distribute.");
+                Console.WriteLine($"You have {pointsAvailable} stat points to distribute.");  //göra en metod för detta också, statisk klass, statiska metoder
                 Console.WriteLine("1. Increase Strength");
                 Console.WriteLine("2. Increase Stamina");
                 Console.WriteLine("3. Increase Intelligence");
@@ -60,12 +51,11 @@ namespace TutorialTheGame
                 
                 string choice = Console.ReadLine();
                 Console.Write("Enter how many points to allocate: ");
-                int points;
 
                 // kontroll för att lägga till stats
-                if (int.TryParse(Console.ReadLine(), out points) && points > 0 && points <= pointsAvailable)
+                if (int.TryParse(Console.ReadLine(), out int points) && points > 0 && points <= pointsAvailable)
                 {
-                    switch (choice)
+                    switch (choice)  //kanske kan göra en metod för alla console.writelines med {stat} istället ?
                     {
                         case "1":
                             Strength += points;
@@ -80,20 +70,17 @@ namespace TutorialTheGame
                             Console.WriteLine($"Intelligence increased by {points}. New Intelligence: {Intelligence}");
                             break;
                         default:
-                            Console.WriteLine("Invalid choice. Please select 1, 2, or 3.");
+                            Console.WriteLine("Invalid choice. Please select 1, 2, or 3."); //kanske invalid här med?
                             continue; // Skippa resten av loopen och be om ett nytt val
                     }
                     pointsAvailable -= points;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid number of points or input. Please try again.");
+                    Ui.InvalidInput();
                 }
             }
-
             Console.WriteLine("All points have been distributed!");
         }
     }
-    
-
 }
