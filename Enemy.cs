@@ -26,6 +26,14 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
             //Lootable = GenerateLoot();
             loot = new Loot();
         }
+        public void MakeEnemyStronger(int floorLevel)
+        {
+            double levelPower = 1 + (0.1 * (floorLevel -1));
+            Health *= levelPower;
+            BaseDamage = (int)(BaseDamage * levelPower);
+            Armor = (int)(Armor * levelPower);
+            Level = floorLevel;
+        }
 
         public Weapon DropLoot()
         {
@@ -37,27 +45,27 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
             // En metod för att ge info information om fienden
         public virtual string GetInfo() // ?
         {
-            return $"{Name} have {Health} HP";
+            return $"{Name} have {Health:F0} HP"; // avrundar till närmsta heltal med :F0
         }
 
             // Fienden attackerar.
         public virtual int Attack()  //kanske en default attack
         {
-                return 0;
+            return 0;
         }
 
             // Fienden försvarar sig.
         public virtual void Defend(double damage)
         {
-                double totalDamage = damage - Armor;
-                if (totalDamage < 0)
-                {
-                    totalDamage = 0;
-                }
-                System.Console.WriteLine($"{Name} takes {totalDamage} damage"); // göra till en metod def om vi lägger till arcaneDefend
-                Console.WriteLine("========================================");
-                Console.WriteLine();
-                Health -= totalDamage;
+            double totalDamage = damage - Armor;
+            if (totalDamage < 0)
+            {
+                totalDamage = 0;
+            }
+            System.Console.WriteLine($"{Name} takes {totalDamage} damage"); // göra till en metod def om vi lägger till arcaneDefend
+            Console.WriteLine("========================================");
+            Console.WriteLine();
+            Health -= totalDamage;
         }
     }
 }

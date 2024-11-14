@@ -89,22 +89,25 @@ namespace TutorialTheGame
     
         public Enemy CreateEnemyForFloor()
         {
+            Enemy enemy;
             if (CurrentFloor == 10)
             {
-                return new Boss("Trangius");
+                enemy = new Boss("Trangius");
             }
             else if (CurrentFloor <= 3)
             {
-                return CreateLowLevelEnemy();
+                enemy = CreateLowLevelEnemy();
             }
             else if (CurrentFloor <= 6)
             {
-                return CreateMidLevelEnemy();
+                enemy = CreateMidLevelEnemy();
             }
             else  //(CurrentFloor <= 9)
             {
-                return CreateHighLevelEnemy();
+                enemy = CreateHighLevelEnemy();
             }
+            enemy.MakeEnemyStronger(CurrentFloor);
+            return enemy;
         }
     }
 }  // istället för olika metoder, lite mer generell, lite kortare, en enda metod? en lista med alla tänkbara fienderna,

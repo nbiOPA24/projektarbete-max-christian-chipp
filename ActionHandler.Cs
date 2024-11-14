@@ -75,7 +75,7 @@ namespace TutorialTheGame
             player.AttackEnemy(e);
         }
         // Enemys turn, Loopar igenom, om fienden är död så ge loot + xp sen ta bort från listan, logik för shaman, annars bli attackerad
-        public void EnemiesTurn(Player player, List<Enemy> enemies)
+        public void EnemiesAction(Player player, List<Enemy> enemies)
         {
             for (int i = 0; i < enemies.Count; i++)
             {
