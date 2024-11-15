@@ -14,26 +14,25 @@ namespace TutorialTheGame
         public double Intelligence { get; set; }
         public Stats (double strength, double stamina, double intelligence)
         {
-            Strength = strength * 0.25;
-            Stamina = stamina * 0.3;
-            Intelligence = intelligence * 0.3;
+            Strength = strength; //* 0.25;  //kanske göra om till heltal istället och gör
+            Stamina = stamina; //* 0.3;
+            Intelligence = intelligence; //* 0.3;
         }
         // metoder för att räkna ut attackskada / stamina / mana
         public double CalculateStrength(double strength, double playerDamage) // kanske försöka streamlina lite och göra en metod om det går? maybe baby
         {
-           
-            playerDamage = playerDamage * strength;
+            playerDamage = playerDamage * (strength * 0.3);
             return playerDamage;
         }
         public double CalculateStamina(double stamina, double playerHealth)
         {
-            playerHealth = playerHealth * stamina;
+            playerHealth = playerHealth * (stamina * 0.3);
             return playerHealth;
         }
 
         public double CalculateIntelligence(double intelligence, double playerMana)
         {
-            playerMana = playerMana * intelligence;
+            playerMana = playerMana * (intelligence * 0.3);
             return playerMana;
         }
 
@@ -44,7 +43,7 @@ namespace TutorialTheGame
             {
                 Ui.DisplayStatsOptions(pointsAvailable); // Visar vilken stat du vill öka, strength, stamina, int
                 string choice = Console.ReadLine();
-                Console.Write("Enter how many points to allocate: ");
+                Console.Write("Enter how many points to add: ");
 
                 // kontroll för att lägga till stats
                 if (int.TryParse(Console.ReadLine(), out int points) && points > 0 && points <= pointsAvailable)
@@ -74,7 +73,7 @@ namespace TutorialTheGame
                     Ui.InvalidInput();
                 }
             }
-            Console.WriteLine("All points have been distributed!");
+            Console.WriteLine("All points have been used!");
         }
     }
 }

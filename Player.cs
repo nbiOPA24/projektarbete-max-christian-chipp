@@ -14,11 +14,10 @@ namespace TutorialTheGame
         public double PlayerHealth { get; set; }
         public double PlayerDamage { get; set; }
         public double PlayerMana { get; set; }
-        public double shieldStrength { get; set; }
+        public double ShieldStrength { get; set; }
         public double Armor { get; set; }
         public Stats PlayerStats {get; set;}
-        public List<Weapon> Inventory {get; set;}
-        public Weapon EquippedWeapon {get;set;}
+        public InventoryHandler InventoryHandler {get; set;}
         public int Experience {get; set;}
         public int Level {get ; set;}
 
@@ -26,82 +25,56 @@ namespace TutorialTheGame
         {
             Name = name;
             PlayerStats = stats;
+            InventoryHandler = new InventoryHandler();
             PlayerHealth = PlayerStats.CalculateStamina(PlayerStats.Stamina, 1000);
             PlayerDamage = PlayerStats.CalculateStrength(PlayerStats.Strength, 2000);
             PlayerMana = PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 500);
             Armor = 0;
-            shieldStrength = 0;
-            Inventory = new List<Weapon>();
+            ShieldStrength = 0;
             Experience = 0;
             Level = 1;
-
-        }
-        public void ShowInventory()
-        {
-            Console.WriteLine("Your Inventory:");
-            foreach (var weapon in Inventory)
-            {
-                Console.WriteLine($"{weapon.Name} - Damage: {weapon.Damage}, Type: {weapon.Type}, Rarity: {weapon.Rarity}");
-            }
-        }
-        public void EquipWeapon(Weapon weapon)
-        {
-            EquippedWeapon = weapon;
-            Console.WriteLine($"{Name} has equipped {weapon.Name}");
-        }
-        public void PickUpLoot(Weapon weapon) // flytta till loot?
-        {
-            Inventory.Add(weapon);
-            Console.WriteLine($"{Name} has picked up an {weapon.Rarity} weapon: {weapon.Name} with {weapon.Damage} damage, Amazing!");
         }
         public void AddExperience(int xp)
         {
             Experience += xp;
             if (Experience >= GetExperienceForNextLevel())
             {
+                Experience -= GetExperienceForNextLevel();
                 LevelUp();
             }
         }
-
         public int GetExperienceForNextLevel()
         {
             return Level * 100; // första test med 100
         }
-
         private void LevelUp()
         {
             Level++;
-            Experience = 0;  // kanske ha -= istället med metoden ovanför ?
             PlayerStats.IncreaseStats(5); // testar med att ge 5 stat points
             Console.WriteLine($"Congratulations! {Name} leveled up to level {Level}!");
         }
-
-       
         public void TakeDamage(double damage)
         {
-            //damage = Enemy.enemies[i].attack();
-            
-            // lägga till bool isShieldBroken så vi inte får samma meddelande hela tiden.
-            if (shieldStrength > 0)
+            bool isShieldBroken = false;
+            if (ShieldStrength > 0)
             {
-                double shieldAbsorbed = Math.Min(damage, shieldStrength);
+                double shieldAbsorbed = Math.Min(damage, ShieldStrength);
                 damage -= shieldAbsorbed;
-                shieldStrength -= shieldAbsorbed;
-                Console.WriteLine($"Your ice shield absorbed {shieldAbsorbed} damage! remaining shield: {shieldStrength}");
+                ShieldStrength -= shieldAbsorbed;
+                Console.WriteLine($"Your ice shield absorbed {shieldAbsorbed} damage! remaining shield: {ShieldStrength}");
                
-                if (shieldStrength <= 0)
+                if (ShieldStrength <= 0 && !isShieldBroken)
                 {
                     Console.WriteLine($"Ice shield is broken you take {damage} damage");
+                    isShieldBroken = true;
                 }
             }
-           
             double totalDamage = damage - Armor;
             System.Console.WriteLine($"{Name} takes {totalDamage} damage");
-            Console.WriteLine("========================================");
+            Ui.BigLine();
             Console.WriteLine();
             PlayerHealth -= totalDamage;
         }
-
         public void Heal(int amount)
         {
             PlayerHealth += amount;
@@ -114,6 +87,5 @@ namespace TutorialTheGame
             Console.WriteLine($"You attack {enemy.Name} for {damage} damage");
             enemy.Defend(damage);
         }
-
     }
 }

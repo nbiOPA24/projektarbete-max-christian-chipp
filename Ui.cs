@@ -96,6 +96,11 @@ namespace TutorialTheGame
             Console.WriteLine("3. Increase Intelligence");
             Console.Write("Choose where to allocate your points (1-3): ");
         }
+        public static string DisplayWeaponInfo(Weapon weapon)
+        {
+            //Console.WriteLine(
+            return $"{weapon.Rarity} weapon: {weapon.Name} with {weapon.Damage} damage, Strength: {weapon.WeaponStats.Strength}, Stamina: {weapon.WeaponStats.Stamina}, Intelligence: {weapon.WeaponStats.Intelligence}";
+        }
     }
 
 }

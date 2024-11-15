@@ -39,7 +39,7 @@ namespace TutorialTheGame
                     break;
 
                 case "6":
-                    player.ShowInventory();
+                    player.InventoryHandler.ShowInventory();
                     break;
 
                 default:
@@ -87,7 +87,7 @@ namespace TutorialTheGame
                     
                     if (droppedLoot != null)
                     {
-                        player.PickUpLoot(droppedLoot);
+                        player.InventoryHandler.PickUpLoot(droppedLoot);
                     }
 
                     enemies.RemoveAt(i);
