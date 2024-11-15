@@ -8,49 +8,42 @@ using System.Threading.Tasks;
 namespace TutorialTheGame
 {
     public class Stats
-    {
+    {   // Strength ökar dmg, stamina hp, int ökar mana + spell dmg
         public double Strength { get; set; }
         public double Stamina { get; set; }
         public double Intelligence { get; set; }
-
         public Stats (double strength, double stamina, double intelligence)
         {
-            Strength = strength * 0.25;
-            Stamina = stamina * 0.3;
-            Intelligence = intelligence * 0.3;
+            Strength = strength; //* 0.25;  //kanske göra om till heltal istället och gör
+            Stamina = stamina; //* 0.3;
+            Intelligence = intelligence; //* 0.3;
         }
+        // metoder för att räkna ut attackskada / stamina / mana
         public double CalculateStrength(double strength, double playerDamage) // kanske försöka streamlina lite och göra en metod om det går? maybe baby
         {
-           
-            playerDamage = playerDamage * strength;
+            playerDamage = playerDamage * (strength * 0.3);
             return playerDamage;
-
-
         }
         public double CalculateStamina(double stamina, double playerHealth)
         {
-            playerHealth = playerHealth * stamina;
+            playerHealth = playerHealth * (stamina * 0.3);
             return playerHealth;
         }
 
         public double CalculateIntelligence(double intelligence, double playerMana)
         {
-            playerMana = playerMana * intelligence;
+            playerMana = playerMana * (intelligence * 0.3);
             return playerMana;
         }
 
+        // Metod för att öka statsen, du får olika alternativ sen ökar den på poängen
         public void IncreaseStats(int pointsAvailable)
         {
             while (pointsAvailable > 0)
             {
-                Console.WriteLine($"You have {pointsAvailable} stat points to distribute.");  //göra en metod för detta också, statisk klass, statiska metoder
-                Console.WriteLine("1. Increase Strength");
-                Console.WriteLine("2. Increase Stamina");
-                Console.WriteLine("3. Increase Intelligence");
-                Console.Write("Choose where to allocate your points (1-3): ");
-                
+                Ui.DisplayStatsOptions(pointsAvailable); // Visar vilken stat du vill öka, strength, stamina, int
                 string choice = Console.ReadLine();
-                Console.Write("Enter how many points to allocate: ");
+                Console.Write("Enter how many points to add: ");
 
                 // kontroll för att lägga till stats
                 if (int.TryParse(Console.ReadLine(), out int points) && points > 0 && points <= pointsAvailable)
@@ -70,7 +63,7 @@ namespace TutorialTheGame
                             Console.WriteLine($"Intelligence increased by {points}. New Intelligence: {Intelligence}");
                             break;
                         default:
-                            Console.WriteLine("Invalid choice. Please select 1, 2, or 3."); //kanske invalid här med?
+                            Ui.InvalidInput();
                             continue; // Skippa resten av loopen och be om ett nytt val
                     }
                     pointsAvailable -= points;
@@ -80,7 +73,7 @@ namespace TutorialTheGame
                     Ui.InvalidInput();
                 }
             }
-            Console.WriteLine("All points have been distributed!");
+            Console.WriteLine("All points have been used!");
         }
     }
 }

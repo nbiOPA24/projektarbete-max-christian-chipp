@@ -97,7 +97,7 @@ namespace TutorialTheGame
             if (HasEnoughMana(player,manaCost))
             {
                 double shieldStrength = baseShieldStrength * player.PlayerStats.Intelligence + random.Next(0, 30);
-                player.shieldStrength = shieldStrength;
+                player.ShieldStrength = shieldStrength;
                 Console.WriteLine($"You cast a ice shield that protects you for {shieldStrength}!");
                 Ui.SmallLine();
                 player.PlayerMana -= manaCost;

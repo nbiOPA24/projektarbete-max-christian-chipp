@@ -5,25 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TutorialTheGame       // to do, defend för arcane damage? med tanke på att den ska ignorera armor.
-{   
-    public abstract class Enemy  //abstrakt klass istället?
+{   //skapa entities istället och ha subklasser för enemies?
+    public abstract class Enemy  //abstrakt klass för alla andra enemies ärver från denna och har gemensamma egenskaper och metoder
     {
         // Alla fiender ska ha detta gemensamt:
+        protected Random random;  // skapar en protected random som gör att alla enemies kan ha den.
         public string Name { get; set; }
         public double Health { get; set; }
+        public int Mana {get; set;}
         public int BaseDamage { get; set; }
         public int Armor { get; set; }
         public double Level { get; set; }  // lägga till så levels ökar kanske, om vi inte kör krister lösning med json?
         public int ExperienceValue {get ; set;}
         public Loot loot {get; init;} // init betyder att man inte sätta / ge mer loot efter man skapat fienden, init står för intialisering så den sätter värdet bara i start
-        public List<Weapon> Lootable {get ; set;} // vet inte riktigt vad jag tänker här, varför har jag lagt till denna nu igen
-        // random  kanske proteced, alla som ärver den kan inte se den.
 
         public Enemy(string name, int xp)
         {
+            random = new Random();
             Name = name;
             ExperienceValue = xp;
-            //Lootable = GenerateLoot();
             loot = new Loot();
         }
         // En metod som gör så att enemies blir lite starkare beroende på vilken nivå man är på, ökar HP,Dmg och Armor med 10%.
@@ -35,7 +35,7 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
             Armor = (int)(Armor * levelPower);
             Level = floorLevel;
         }
-
+        // genererar loot (vapen) som droppas när enemy dör
         public Weapon DropLoot()
         {
             return loot.GenerateLoot();
