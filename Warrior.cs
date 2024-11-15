@@ -13,21 +13,16 @@ namespace TutorialTheGame
 
         public Warrior(string name, int xp) : base(name, xp)
         {
-
             Random random = new Random();
             Name = name;
             Health = 30 + random.Next(0, 40);
             BaseDamage = 15;
             Armor = 20;
             Rage = 0;
-            //Experience = 5;
-            //ExpReward = 5; // får bestämma ;)
-            //Level = Level * 0.3;
         }
 
         public override int Attack()
-        {//             damage = BaseDamage + random.Next(0, 30);
-
+        {
             int damage;
             Random random = new Random();
             damage = BaseDamage + random.Next(0, 35);
@@ -35,8 +30,7 @@ namespace TutorialTheGame
             {
                 damage = random.Next(30, 70);
                 Console.WriteLine($"{Name} gets ragefueled and hits you with MORTAL STRIKE and damages you for {damage}");
-                Console.WriteLine("---------------------------");
-
+                Ui.SmallLine();
                 Rage += random.Next(1, 15);
                 Rage -= 50;
             }
@@ -45,10 +39,14 @@ namespace TutorialTheGame
                 damage = BaseDamage + random.Next(0, 35);
                 Rage += random.Next(1, 31);
                 Console.WriteLine($"{Name} smacks you with his axe for {damage}");
-                Console.WriteLine("---------------------------");
+                Ui.SmallLine();
 
             }
-                return damage;
+            return damage;
+        }
+        public override void Defend(double damage)
+        {
+            base.Defend(damage);
         }
     }
 }

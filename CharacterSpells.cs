@@ -12,6 +12,7 @@ namespace TutorialTheGame
     {
         // kanske ha heal här med som en vanlig spell?? sätta level requirements
         private Random random = new Random();
+        // bool för att se om playern har tillräckligt med mana för att attackera, så vi kan använda den på alla spells
         public bool HasEnoughMana(Player player, int manaCost)
         {
             if (player.PlayerMana >= manaCost) 
@@ -25,18 +26,18 @@ namespace TutorialTheGame
         {
             int BaseDamage = 30;
             int manaCost = 20;
-            
 
             if (HasEnoughMana(player,manaCost))
             { //A basic fire spell that deals damage to a single enemy
                 double damage = BaseDamage * player.PlayerStats.Intelligence + random.Next(0, 30);
                 Console.WriteLine($"Fireball! has been cast for {damage} it's super effective!");
-                Console.WriteLine("---------------------------");
+                Ui.SmallLine();
                 player.PlayerMana -= manaCost;
                 return damage;
             }
             return 0;
         }
+        // Sätter bas variabler, gör en mana kontroll, sen gör vi en Var på skadan baserat på Int och random, tar bort mana och skriver ut damagen.
         public double LightningStrike(Player player)
         {  //A powerful spell that strikes an enemy with lightning
             int BaseDamage = 30;
@@ -46,7 +47,7 @@ namespace TutorialTheGame
             {
                 double damage = BaseDamage * player.PlayerStats.Intelligence + random.Next(0, 30);
                 Console.WriteLine($"Lightning Srike zaps you for {damage}!");
-                Console.WriteLine("---------------------------");
+                Ui.SmallLine();
                 player.PlayerMana -= manaCost;
                 return damage;
                 //kanske lägga till en stun effekt?
@@ -63,7 +64,7 @@ namespace TutorialTheGame
             {
                 double damage = BaseDamage * player.PlayerStats.Intelligence + random.Next(0, 30);
                 Console.WriteLine($"Casts Arcane Blast for {damage}!");
-                Console.WriteLine("---------------------------");
+                Ui.SmallLine();
                 player.PlayerMana -= manaCost;
                 return damage;
             }
@@ -83,8 +84,7 @@ namespace TutorialTheGame
                     double damage = BaseDamage * player.PlayerStats.Intelligence + random.Next(0, 30);
                     enemy.Health -= damage; 
                     Console.WriteLine($"The area erupts with poison, damaging every enemy for {damage}!"); // TODO skriva ut vilken enemy som tar skada
-                    Console.WriteLine("---------------------------");
-                    
+                    Ui.SmallLine();
                 }
             }
 
@@ -99,7 +99,7 @@ namespace TutorialTheGame
                 double shieldStrength = baseShieldStrength * player.PlayerStats.Intelligence + random.Next(0, 30);
                 player.shieldStrength = shieldStrength;
                 Console.WriteLine($"You cast a ice shield that protects you for {shieldStrength}!");
-                Console.WriteLine("---------------------------");
+                Ui.SmallLine();
                 player.PlayerMana -= manaCost;
             }
         }

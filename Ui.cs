@@ -53,7 +53,7 @@ namespace TutorialTheGame
         }
         public static void SmallLine()
         {
-            Console.WriteLine("---------------------------");
+            Console.WriteLine("----------------------------------------");
         }
         public static void BigLine()
         {
@@ -82,6 +82,11 @@ namespace TutorialTheGame
         public static void InvalidTarget()
         {
             Console.WriteLine("There was no enemy to attack, you strike air");
+        }
+        public static void NoMana(string enemyName)
+        {
+            Console.WriteLine($"{enemyName} has no mana for casting");
+            SmallLine();
         }
     }
 

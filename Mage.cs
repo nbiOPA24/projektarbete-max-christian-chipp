@@ -20,8 +20,6 @@ namespace TutorialTheGame
             Mana = 20 + random.Next(0, 80);
             Armor = 5;
             Name = name;
-
-            //Experience = 5;  // Får bestämma ;)
         }
 
         // Magikern attackerar
@@ -36,15 +34,13 @@ namespace TutorialTheGame
             {
                 damage = BaseDamage + random.Next(0, 30);
                 Console.WriteLine($"{Name} hurls a fireball at you for {damage} damage");
-                Console.WriteLine("---------------------------");
+                Ui.SmallLine();
 
                 Mana -= 10;
             }
             else // magikern har inte tillräckligt med mana för att kasta en eldboll
             {
-                Console.WriteLine($"{Name} has no mana for casting");
-                Console.WriteLine("---------------------------");
-
+                Ui.NoMana(Name);
                 Mana += 5;
                 damage = 0;
             }

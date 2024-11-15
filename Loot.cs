@@ -12,7 +12,7 @@ namespace TutorialTheGame
         public List<Weapon> Weapons {get; set;}
         private static Random random = new Random();
 
-
+        // skapar vapen och lägger in dom i en lista
         public Loot()
         {
             Weapons = new List<Weapon> // ska såklart ha stats, itemlevel?
@@ -22,6 +22,7 @@ namespace TutorialTheGame
             };
             
         }
+        // Genererar vapen
         public Weapon GenerateLoot()
         {
             if (Weapons.Count == 0) return null;

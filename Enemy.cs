@@ -26,6 +26,7 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
             //Lootable = GenerateLoot();
             loot = new Loot();
         }
+        // En metod som gör så att enemies blir lite starkare beroende på vilken nivå man är på, ökar HP,Dmg och Armor med 10%.
         public void MakeEnemyStronger(int floorLevel)
         {
             double levelPower = 1 + (0.1 * (floorLevel -1));
@@ -39,9 +40,6 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
         {
             return loot.GenerateLoot();
         } 
-    
-            // Metoder som alla fiender ska ha. Dessa anropas med hjälp av polymorfism:
-
             // En metod för att ge info information om fienden
         public virtual string GetInfo() // ?
         {
@@ -54,7 +52,7 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
             return 0;
         }
 
-            // Fienden försvarar sig.
+            // Fienden försvarar sig. har även en kontroll ifall man skulle göra mindre skada än 0, annars får enemies HP istället.
         public virtual void Defend(double damage)
         {
             double totalDamage = damage - Armor;
@@ -63,7 +61,7 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
                 totalDamage = 0;
             }
             System.Console.WriteLine($"{Name} takes {totalDamage} damage"); // göra till en metod def om vi lägger till arcaneDefend
-            Console.WriteLine("========================================");
+            Ui.BigLine();
             Console.WriteLine();
             Health -= totalDamage;
         }
