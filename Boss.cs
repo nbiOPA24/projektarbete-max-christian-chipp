@@ -11,7 +11,8 @@ namespace TutorialTheGame
         private int Rage { get; set; }
         bool isGiant;
         private Random random = new Random();
-        public Boss(string name) : base(name, 25)
+        // konstruktor för bossen, har en extra Var som heter Rage
+        public Boss(string name) : base(name, 25) 
         {
             Name = name;
             Health = 500 + random.Next(0, 100);
@@ -22,9 +23,9 @@ namespace TutorialTheGame
         }
 
 
+        // Boss attack, bygger up rage och gör sen en special ability om den får tillräckligt med rage som sen nollställs.    
         public override int Attack()
         {
-
             int damage;
             if (Rage >= 110)
             {
@@ -39,9 +40,8 @@ namespace TutorialTheGame
                 Rage += random.Next(25, 50);
 
             }
-            Console.WriteLine("--------------------");
+            Ui.SmallLine();
             return damage;
-
         }
           public override void Defend(double damage)
         {

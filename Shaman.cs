@@ -22,9 +22,6 @@ namespace TutorialTheGame
             Mana = 20 + random.Next(0, 80);
             Armor = 5;
             Name = name;
-            //Level = Level * 0.3;
-            //Experience = 5;
-            // ExpReward = 5; // Får bestämma :D
         }
 
         // return value - denna metod returnerar ett heltal som är skadan som magikern gör
@@ -40,19 +37,17 @@ namespace TutorialTheGame
 
                 if (enemyToHeal != null)
                 {
-                enemyToHeal.Health += Heal;
-                Console.WriteLine($"{Name} heals {enemyToHeal.Name} for {Heal} health");
-                Console.WriteLine("---------------------------");
-
+                    enemyToHeal.Health += Heal;
+                    Console.WriteLine($"{Name} heals {enemyToHeal.Name} for {Heal} health");
+                    Ui.SmallLine();
                     Mana -= 10;
+                    //return Heal;
                 }
             }
             else 
             {
                 Mana += 5;
-                Console.WriteLine($"{Name} has no mana");
-                Console.WriteLine("---------------------------");
-
+                Ui.NoMana(Name);
                 Heal = 0;
             }
             return Heal;

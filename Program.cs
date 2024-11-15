@@ -20,7 +20,7 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
 {
     static void Main(string[] args)
     {
-      
+        //instanserar lite klasser och skapar en spelare
         Stats playerStats = new Stats(10,100,5);
         Player player = new Player("BitchAss", playerStats);
         //CharacterSpells spells = new CharacterSpells();
@@ -30,9 +30,8 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
         PlayerActionHandler action = new PlayerActionHandler();
         bool gameCompleted = false;
 
-        Console.WriteLine("Do you want to load a saved game? (y/n)");
+        Console.WriteLine("Do you want to load a saved game? (y/n)");  // logik för att ladda ett sparat spel
         string loadInput = Console.ReadLine().ToLower();
-
         if (loadInput == "y")
         {
             Player loadedPlayer = GameDataManager.LoadGame("savegame.json");
@@ -61,7 +60,7 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
                 action.PlayerAction(player, enemies); // man gör sin tur, attack/heal/spell
                 action.EnemiesAction(player, enemies); // enemeies attackerar
 
-                if (enemies.Count == 0)
+                if (enemies.Count == 0) // ser till att du går upp i nivå / klarar spelet
                 {
                     if (floorHandler.CurrentFloor < 10)
                     {

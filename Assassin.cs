@@ -21,13 +21,9 @@ namespace TutorialTheGame
             BaseDamage = 20;
             Armor = 15;
             isVisible = false; // TODO: random på/av???
-           // xp = 5; //Får bestämma ;) får ha det i konstruktorn istället
-            //Level = Level * 0.3;
-            
-             
         }
 
-        // Ger information om lönnmördaren.
+        // Ger information om Assasin.
         public override string GetInfo() /*?*/
         {
             if (isVisible)
@@ -35,35 +31,32 @@ namespace TutorialTheGame
             else
                 return null;
         }
-
-        // lönnmördaren attackerar olika beroende på om den är synlig eller inte:
+        // Assasin attackerar olika beroende på om den är synlig eller inte:
         public override int Attack()
         {
             int damage;
             // if it is visible, it will attack
-            //Random random = new Random();
-
             if (isVisible)
             {
                 damage = BaseDamage + random.Next(0, 30);
                 Console.WriteLine($"{Name} Stabs you with it's dagger for {damage} damage");
-                Console.WriteLine("---------------------------");
+                Ui.SmallLine();
 
                 isVisible = false;   
                 return damage;
             }
-            else
+            else // stealth attack
             {
                 damage = BaseDamage + random.Next(0, 10);
                 Console.WriteLine($"A arrow shoots from somewhere for {damage} damage");
-                Console.WriteLine("---------------------------");
+                Ui.SmallLine();
 
                 isVisible = true;
                 return damage;
             }
         }
 
-        // lönnmördaren försvarar sig men bara om den är synlig, annars tar den ingen skada 
+        // assasin försvarar sig men bara om den är synlig, annars tar den ingen skada 
         public override void Defend(double damage)
         {
             if (isVisible)
