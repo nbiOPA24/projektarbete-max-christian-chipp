@@ -8,40 +8,32 @@ namespace TutorialTheGame
 {
     class Shaman : Enemy
     {
-        // Egenskaper
-        public int Mana { get; set; }
+        // Egenskaper, denna klassen har en BaseHeal istället för Damage.
         public int BaseHeal { get; set; }
 
-        // konstruktor för att skapa magikern:
+        // konstruktor för shamanen:
         public Shaman(string name, int xp): base(name, xp)
         {
-            //BaseDamage = 10;
-            BaseHeal = 5;
-            Random random = new Random();
+            BaseHeal = 10;
             Health = 35 + random.Next(0, 30);
             Mana = 20 + random.Next(0, 80);
             Armor = 5;
-            Name = name;
         }
 
-        // return value - denna metod returnerar ett heltal som är skadan som magikern gör
+        //Heal metod istället för attack, returnerar ett heltal som är hur mycket hp den healar
         public int Heal(List<Enemy> enemies)
         {
             int Heal; 
-            // TODO: Lägg till fler attacker som vi slumpar emellan
             if (Mana > 10)
             {
                 Enemy enemyToHeal = FindEnemyLowHp(enemies);
-                Random random = new Random();
                 Heal = BaseHeal + random.Next(0, 20);
-
                 if (enemyToHeal != null)
                 {
                     enemyToHeal.Health += Heal;
                     Console.WriteLine($"{Name} heals {enemyToHeal.Name} for {Heal} health");
                     Ui.SmallLine();
                     Mana -= 10;
-                    //return Heal;
                 }
             }
             else 
@@ -52,7 +44,7 @@ namespace TutorialTheGame
             }
             return Heal;
         }
-       
+       // Metod för att hitta enemy med lägst HP
         static Enemy FindEnemyLowHp(List<Enemy> enemies)
         {
             Enemy lowestHp = enemies[0];

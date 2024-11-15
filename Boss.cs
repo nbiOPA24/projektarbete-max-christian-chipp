@@ -8,45 +8,40 @@ namespace TutorialTheGame
 {
     class Boss : Enemy
     {
-        private int Rage { get; set; }
         bool isGiant;
-        private Random random = new Random();
-        // konstruktor för bossen, har en extra Var som heter Rage
+        // konstruktor för bossen, anropar basklassen och sätter initiala värden.
         public Boss(string name) : base(name, 25) 
         {
-            Name = name;
             Health = 500 + random.Next(0, 100);
             BaseDamage = 50;
             Armor = 30;
-            Rage = 0;
+            Mana = 0;
             isGiant = true;  // vad är denna till för ? framtid tanke? kanske öka defense/armor när den är aktiv, men är det värt det?
         }
 
 
-        // Boss attack, bygger up rage och gör sen en special ability om den får tillräckligt med rage som sen nollställs.    
+        // Boss attack, bygger up mana gör sen en special ability om den får tillräckligt med mana som sen nollställs.    
         public override int Attack()
         {
             int damage;
-            if (Rage >= 110)
+            if (Mana >= 110)
             {
                 damage = random.Next(100, 175);
                 Console.WriteLine($"{Name} enters a furious spin, dealing {damage} damage!");
-                Rage = 0;
+                Mana = 0;
             }
             else
             {
                 damage = BaseDamage + random.Next(20, 65);
                 Console.WriteLine($"{Name} strikes you with his axe, dealing {damage} damage!");
-                Rage += random.Next(25, 50);
-
+                Mana += random.Next(25, 50);
             }
             Ui.SmallLine();
             return damage;
         }
-          public override void Defend(double damage)
+        public override void Defend(double damage)
         {
             base.Defend(damage);
         }
-
     }
 }

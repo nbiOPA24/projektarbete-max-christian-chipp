@@ -88,6 +88,14 @@ namespace TutorialTheGame
             Console.WriteLine($"{enemyName} has no mana for casting");
             SmallLine();
         }
+        public static void DisplayStatsOptions(int pointsAvailable)
+        {
+            Console.WriteLine($"You have {pointsAvailable} stat points to distribute.");  //göra en metod för detta också, statisk klass, statiska metoder
+            Console.WriteLine("1. Increase Strength");
+            Console.WriteLine("2. Increase Stamina");
+            Console.WriteLine("3. Increase Intelligence");
+            Console.Write("Choose where to allocate your points (1-3): ");
+        }
     }
 
 }

@@ -16,7 +16,7 @@ using System.Transactions;
 // ╔╗
 // ║║           läggat ill threadsleep på enemy attacker
 // ╚╝
-static class Program //skriva metoder på menyn istället så det inte blir stökigt, samma med ui
+static class Program //skriva metoder på menyn istället så det inte blir stökigt, samma med ui  // lägga till xp på xp display // ändra så shaman inte healer död // fixa turn så du kan gå igenom inventory utan att bli attakerad
 {
     static void Main(string[] args)
     {

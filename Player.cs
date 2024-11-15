@@ -49,7 +49,7 @@ namespace TutorialTheGame
             EquippedWeapon = weapon;
             Console.WriteLine($"{Name} has equipped {weapon.Name}");
         }
-        public void PickUpLoot(Weapon weapon)
+        public void PickUpLoot(Weapon weapon) // flytta till loot?
         {
             Inventory.Add(weapon);
             Console.WriteLine($"{Name} has picked up an {weapon.Rarity} weapon: {weapon.Name} with {weapon.Damage} damage, Amazing!");
