@@ -5,6 +5,7 @@ namespace TutorialTheGame
     public static class Ui
     {
         //Enemy enemy = new Enemy();
+        // kanske lägga till en "Press anykey to continue" för console.reeadkey
         public static void MenuOptions()
         {
             Console.WriteLine("Your options:");
@@ -33,8 +34,9 @@ namespace TutorialTheGame
             Console.WriteLine($"You have {player.PlayerHealth} HP left");
             Console.WriteLine($"You have {player.PlayerMana} Mana Left");
             Console.WriteLine($"You are on floor {floorHandler.CurrentFloor}");
-            Console.WriteLine($"You have {player.Experience} / {player.GetExperienceForNextLevel()}");   // sätta in en character display kanske istället? eller visa staten med inventoryt?
+            Console.WriteLine($"You have {player.Experience} / {player.GetExperienceForNextLevel()} XP");   // sätta in en character display kanske istället? eller visa staten med inventoryt?
             BigLine();
+            Console.WriteLine($"Stamina = {player.PlayerStats.Stamina}, Damage = {player.PlayerDamage}, st{player.PlayerStats.Strength} int {player.PlayerStats.Intelligence}"); //preliminär för felsökning
         }
         public static void DisplayEnemies(List<Enemy> enemies)
         {
@@ -100,6 +102,19 @@ namespace TutorialTheGame
         {
             //Console.WriteLine(
             return $"{weapon.Rarity} weapon: {weapon.Name} with {weapon.Damage} damage, Strength: {weapon.WeaponStats.Strength}, Stamina: {weapon.WeaponStats.Stamina}, Intelligence: {weapon.WeaponStats.Intelligence}";
+        }
+        public static void DisplayInventoryMenu()
+        {
+            Console.Clear();
+            BigLine();
+            Console.WriteLine("=== Inventory Menu ===");
+            BigLine();
+            Console.WriteLine("1. Equip Weapon");
+            Console.WriteLine("2. Remove Weapon");
+            Console.WriteLine("3. Display Current Weapon");
+            Console.WriteLine("4. Show inventory");
+            Console.WriteLine("5. Exit Inventory");
+            Console.Write("Choose an option: ");
         }
     }
 

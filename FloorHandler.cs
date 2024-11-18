@@ -10,7 +10,7 @@ namespace TutorialTheGame
 
         public FloorHandler()
         {
-            CurrentFloor = 7;
+            CurrentFloor = 1; //7
         }
         public void AdvanceFloor()
         {
@@ -41,11 +41,11 @@ namespace TutorialTheGame
 
             if (type == 0)
             {
-                return new Mage("Apprentice Mage", 10);
+                return new Mage("Apprentice Mage", 20);
             }
             else
             {
-                return new Assassin("Novice Assasin", 10);
+                return new Assassin("Novice Assasin", 20);
             }
         }
         public Enemy CreateMidLevelEnemy()
@@ -53,15 +53,15 @@ namespace TutorialTheGame
             int type = random.Next(3);
             if (type == 0)
             {
-                return new Mage("Occultist Mage", 20);
+                return new Mage("Occultist Mage", 30);
             }
             else if (type == 1)
             {
-                return new Warrior("Orc Warrior", 20);
+                return new Warrior("Orc Warrior", 30);
             }
             else 
             {
-                return new Assassin("Shadow Assasin", 20);
+                return new Assassin("Shadow Assasin", 30);
             }
         }
         public Enemy CreateHighLevelEnemy()  //switch istället, kanske nya switch med lambda
@@ -70,19 +70,19 @@ namespace TutorialTheGame
 
             if (type == 0)
             {
-                return new Mage("Witch of Fire", 30);
+                return new Mage("Witch of Fire", 40);
             }
             else if (type == 1)
             {
-                return new Warrior("Elite Warrior", 30);
+                return new Warrior("Elite Warrior", 40);
             }
             else if (type == 2)
             {
-                return new Assassin("Ninja of West", 30);
+                return new Assassin("Ninja of West", 40);
             }
             else
             {
-                return new Shaman("Shaman of the Forest", 30);
+                return new Shaman("Shaman of the Forest", 40);
             }            
             
         }
