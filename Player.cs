@@ -25,10 +25,10 @@ namespace TutorialTheGame
         {
             Name = name;
             PlayerStats = stats;
-            InventoryHandler = new InventoryHandler();
-            PlayerHealth = PlayerStats.CalculateStamina(PlayerStats.Stamina, 1000);
-            PlayerDamage = PlayerStats.CalculateStrength(PlayerStats.Strength, 2000);
-            PlayerMana = PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 500);
+            InventoryHandler = new InventoryHandler(this);
+            PlayerHealth = PlayerStats.CalculateStamina(PlayerStats.Stamina, 10); //1000
+            PlayerDamage = PlayerStats.CalculateStrength(PlayerStats.Strength, 100); //2000
+            PlayerMana = PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 5); // 500
             Armor = 0;
             ShieldStrength = 0;
             Experience = 0;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 namespace TutorialTheGame
 {
     public class PlayerActionHandler
@@ -40,8 +41,9 @@ namespace TutorialTheGame
 
                 case "6":
                     player.InventoryHandler.ShowInventory();
+                    inventoryAction(player);
                     break;
-
+               
                 default:
                     Ui.InvalidInput();
                     break;
@@ -172,6 +174,63 @@ namespace TutorialTheGame
                 default:
                     Ui.InvalidInput();
                     break;
+            }
+        }
+        public void inventoryAction(Player player)
+        {
+            bool checkInventory = true;
+
+            while (checkInventory)
+            {
+                Ui.DisplayInventoryMenu();
+                string input = Console.ReadLine();
+
+                switch(input)
+                {
+                    case "1":  // Equip (använd) ett vapen
+                        player.InventoryHandler.ShowInventory();
+                        Console.WriteLine("Choose a weapon to equip by entering its number:"); // lägga till så man ser nummer också....
+                        string equipInput = Console.ReadLine();
+
+                        bool isEquipIndex = int.TryParse(equipInput, out int equipIndex); //felkontroll 
+                        bool isEquipInRange = equipIndex > 0 && equipIndex <= player.InventoryHandler.Inventory.Count;
+
+                        if (isEquipIndex && isEquipInRange)
+                        {
+                            Weapon weaponToEquip = player.InventoryHandler.Inventory[equipIndex - 1];
+                            player.InventoryHandler.EquipWeapon(player, weaponToEquip);
+                        }
+                        else
+                        {
+                            Ui.InvalidInput();
+                        }
+                        break;
+
+                    case "2":  // Tar bort (unequippar) nuvarande vapen
+                        player.InventoryHandler.UnequipWeapon(player);
+                        break;
+                    case "3":  // visar vilket vapen man har equippat
+                        if (player.InventoryHandler.EquippedWeapon != null)
+                        {
+                            Console.WriteLine($"Currently equipped weapon: {Ui.DisplayWeaponInfo(player.InventoryHandler.EquippedWeapon)}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No weapon is currently equipped.");
+                        }
+                        break;
+                    case "4": // visar hela inventoryn
+                        player.InventoryHandler.ShowInventory();
+                        break;
+                    case "5": // avslutar loopen / exit inventory
+                        checkInventory = false;
+                         break;
+
+                    default:
+                        Ui.InvalidInput();
+                        break;
+                }
+                Console.ReadKey();
             }
         }
     }

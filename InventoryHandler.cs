@@ -8,10 +8,12 @@ namespace TutorialTheGame
     {
         public List<Weapon> Inventory {get; set;}
         public Weapon EquippedWeapon {get; set;}
+        public Player player;
 
-        public InventoryHandler()
+        public InventoryHandler(Player player)
         {
             Inventory = new List<Weapon>();
+            this.player = player;
         }
         public void ShowInventory()
         {
@@ -21,10 +23,33 @@ namespace TutorialTheGame
                 Console.WriteLine(Ui.DisplayWeaponInfo(weapon));
             }
         }
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(Player player, Weapon weapon)  //möjligtvis lägga till en kontroll för med equippedweapon == weapon, men verkar inte behövas, måste dubbelchecka med 2 av samma vapen.
         {
+            if (EquippedWeapon != null)
+            {
+                UnequipWeapon(player);//, weapon);
+            }
+            player.PlayerDamage += weapon.Damage;
+            player.PlayerStats.Strength += weapon.WeaponStats.Strength;
+            player.PlayerStats.Stamina += weapon.WeaponStats.Stamina;
+            player.PlayerStats.Intelligence += weapon.WeaponStats.Intelligence;
+
             EquippedWeapon = weapon;
             Console.WriteLine($"You have equipped {Ui.DisplayWeaponInfo(weapon)}");
+        }
+        public void UnequipWeapon(Player player)//,Weapon weapon)
+        {
+            if (EquippedWeapon == null)
+            {
+                Console.WriteLine("No weapon equipped");
+                return;
+            }
+            player.PlayerDamage -= EquippedWeapon.Damage;
+            player.PlayerStats.Strength -= EquippedWeapon.WeaponStats.Strength;
+            player.PlayerStats.Stamina -= EquippedWeapon.WeaponStats.Stamina;
+            player.PlayerStats.Intelligence -= EquippedWeapon.WeaponStats.Intelligence;
+            EquippedWeapon = null;  //eventuellt behöva ta bort från listan så det inte är duplicerat? eller kanske inte spelar roll
+            Console.WriteLine($"You have unequipped your weapon"); //{Ui.DisplayWeaponInfo(weapon)}");
         }
         public void PickUpLoot(Weapon weapon)
         {
