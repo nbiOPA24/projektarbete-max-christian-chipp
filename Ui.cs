@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 namespace TutorialTheGame
 {
     public static class Ui
@@ -115,6 +116,93 @@ namespace TutorialTheGame
             Console.WriteLine("4. Show inventory");
             Console.WriteLine("5. Exit Inventory");
             Console.Write("Choose an option: ");
+        }
+        public static void PressKeyContinue()
+        {
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
+        }
+        public static void AskForName()
+        {
+            Console.WriteLine("What's your name Hero?");
+        }
+        public static void IntroStory(Player player)
+        {   
+            Console.WriteLine("The night sky was a cloak of darkness that stretched endlessly, as the ominous silhouette of the Tower of Trials loomed over the horizon.");
+            Thread.Sleep(1200);
+            Console.WriteLine("It was said that the tower appeared only to those brave or foolish enough to challenge its mysteries—a beacon for heroes and adventurers seeking fortune, glory, or escape.");
+            Thread.Sleep(1200);
+            Console.WriteLine($"You,{player.Name}, found yourself at its foot, staring up into the abyss above.");
+            Thread.Sleep(1200);
+            Console.WriteLine("The entrance was a cold archway carved with the runes of an ancient language.");
+            Thread.Sleep(1200);
+            Console.WriteLine("You couldn't help but feel that it judged you, weighing your worth as a challenger.");
+            Thread.Sleep(1200);
+            Console.WriteLine("But you did not hesitate, for you had your reasons to be here.");
+            Thread.Sleep(1200);
+            Console.WriteLine("Maybe it was to prove something to yourself, maybe to someone else—whatever it was, you knew that the tower held the answers you sought.");
+            Thread.Sleep(1200);
+        }
+        public static void FirstFloorStory()
+        {
+            Console.WriteLine("The early floors were a test of will.");
+            Thread.Sleep(1200);
+            Console.WriteLine("The Apprentice Mages, frail but unpredictable, hurled fireballs that threatened to catch you off guard.");
+            Thread.Sleep(1200);
+            Console.WriteLine("You fought through novice assassins—quick and cunning—who ambushed from the shadows, testing your reflexes and resolve.");
+            Thread.Sleep(1200);
+            Console.WriteLine("These initial trials were meant to weed out the unworthy.");
+            Thread.Sleep(1200);
+            Console.WriteLine("The stones underfoot seemed to groan with the souls of past adventurers who hadn’t made it beyond the first few levels.");
+            Thread.Sleep(1200);
+            Console.WriteLine("But you knew, this was only the beginning.");
+            Thread.Sleep(1200);
+        }
+        public static void MidLevelStory()
+        {
+            Console.WriteLine("As you climbed higher, the air grew thick with tension.");
+            Thread.Sleep(1200);
+            Console.WriteLine("Orc Warriors stomped down the narrow hallways, their weapons capable of shattering bones in one fell swing.");
+            Thread.Sleep(1200);
+            Console.WriteLine("Occultist Mages conjured dark spells that drained your strength, forcing you to think strategically.");
+            Thread.Sleep(1200);
+            Console.WriteLine("It wasn’t enough just to fight anymore—it was about survival.");
+            Thread.Sleep(1200);
+            Console.WriteLine("You had to decide when to use your spells, when to conserve mana, and when to call upon the potions you'd collected.");
+            Thread.Sleep(1200);
+            Console.WriteLine("With every enemy that fell, you grew stronger, the weight of your weapon becoming more familiar in your hand, and the power within you awakening.");
+            Thread.Sleep(1200);
+        }
+        public static void HighLevelStory()
+        {
+            Console.WriteLine("Here, the tower revealed its true cruelty.");
+            Thread.Sleep(1200);
+            Console.WriteLine("The Elite Warriors stood as guardians, testing your every move, forcing you into prolonged battles that tested your endurance.");
+            Thread.Sleep(1200);
+            Console.WriteLine("The Witch of Fire scorched the very ground beneath you, her laughter echoing through the halls as her flames sought to consume you whole.");
+            Thread.Sleep(1200);
+            Console.WriteLine("The Shamans were perhaps the cruelest.");
+            Thread.Sleep(1200);
+            Console.WriteLine("Healing their allies, prolonging fights until you were on the brink of exhaustion.");
+            Thread.Sleep(1200);
+            Console.WriteLine("Every victory felt like it was paid for in blood, and every rest moment was fleeting, as you steeled yourself for what lay ahead.");
+            Thread.Sleep(1200);
+        }
+        public static void BossLevelStory()
+        {
+            Console.WriteLine("You reached the final floor of this part of the tower, a vast circular chamber bathed in eerie light.");
+            Thread.Sleep(1200);
+            Console.WriteLine("The floor was etched with ancient sigils, and at its center stood Trangius, the Keeper of the Tower—a massive figure wielding an axe that seemed forged from nightmares.");
+            Thread.Sleep(1200);
+            Console.WriteLine("His roar shook the walls as he stepped forward, and you felt your courage tested to its very limits.");
+            Thread.Sleep(1200);
+            Console.WriteLine("This wasn’t just another battle—this was a reckoning.");
+            Thread.Sleep(1200);
+            Console.WriteLine("Trangius had seen countless challengers before you, and he did not intend to fall.");
+            Thread.Sleep(1200);
+            Console.WriteLine("The air crackled with tension as you prepared your spells, gripped your weapon tightly, and charged.");
+            Thread.Sleep(1200);
         }
     }
 
