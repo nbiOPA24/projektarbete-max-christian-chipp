@@ -1,7 +1,9 @@
 ﻿﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Dynamic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.XPath;
@@ -21,18 +23,35 @@ namespace TutorialTheGame
         public int Experience {get; set;}
         public int Level {get ; set;}
 
-        public Player(string name, Stats stats)
+
+        public double BaseHealth { get; set; } // TEST
+        public double BaseDamage { get; set; }
+        public double BaseMana { get; set; }
+
+        public Player(string name)
         {
             Name = name;
-            PlayerStats = stats;
+            PlayerStats = new Stats(10, 10, 10);
             InventoryHandler = new InventoryHandler(this);
-            PlayerHealth = PlayerStats.CalculateStamina(PlayerStats.Stamina, 10); //1000
-            PlayerDamage = PlayerStats.CalculateStrength(PlayerStats.Strength, 100); //2000
-            PlayerMana = PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 5); // 500
+           /* PlayerHealth = PlayerStats.CalculateStamina(PlayerStats.Stamina, 100); //1000
+            PlayerDamage = 60;//PlayerStats.CalculateStrength(PlayerStats.Strength, 15); //2000
+            PlayerMana = PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 10);//(PlayerStats.Intelligence, 0); // 500 */
+            BaseHealth = 1000;
+            BaseDamage = 100;   // TEST
+            BaseMana = 100;
             Armor = 0;
             ShieldStrength = 0;
             Experience = 0;
             Level = 1;
+            Console.WriteLine($"PlayerMana after calculation: {PlayerMana} dmg = {PlayerDamage} strength = {PlayerStats.Strength}, stam = {PlayerHealth}");
+            UpdateStats(); // test
+        }
+        public void UpdateStats() //tillfällig skit för att räkna ut problemet
+        {
+            PlayerMana = BaseMana + Stats.CalculateIntelligence(PlayerStats.Intelligence);
+            PlayerHealth = BaseHealth + Stats.CalculateStamina(PlayerStats.Stamina); //1000
+            PlayerDamage = BaseDamage + (InventoryHandler.EquippedWeapon != null ? InventoryHandler.EquippedWeapon.Damage : 0) + Stats.CalculateStrength(PlayerStats.Strength);//InventoryHandler.EquippedWeapon.Damage + Stats.CalculateStrength(PlayerStats.Strength); //2000
+            Console.WriteLine($"PlayerMana after calculation: {PlayerMana}, dmg = {PlayerDamage}, stam = {PlayerHealth}");
         }
         public void AddExperience(int xp)
         {
@@ -50,7 +69,8 @@ namespace TutorialTheGame
         private void LevelUp()
         {
             Level++;
-            PlayerStats.IncreaseStats(5); // testar med att ge 5 stat points
+            PlayerStats.IncreaseStats(5, this); // testar med att ge 5 stat points
+            UpdateStats(); //tillfälle
             Console.WriteLine($"Congratulations! {Name} leveled up to level {Level}!");
         }
         public void TakeDamage(double damage)
@@ -66,7 +86,7 @@ namespace TutorialTheGame
                 if (ShieldStrength <= 0 && !isShieldBroken)
                 {
                     Console.WriteLine($"Ice shield is broken you take {damage} damage");
-                    isShieldBroken = true;
+                    // onödig men ja. isShieldBroken = true;
                 }
             }
             double totalDamage = damage - Armor;

@@ -74,7 +74,7 @@ namespace TutorialTheGame
             if (data != null)
             {
                 Stats playerStats = data.PlayerStats;
-                Player player = new Player(data.PlayerName, playerStats)
+                Player player = new Player(data.PlayerName)
                 {
                     PlayerHealth = data.PlayerHealth,
                     PlayerMana = data.PlayerMana,

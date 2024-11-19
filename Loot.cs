@@ -21,13 +21,13 @@ namespace TutorialTheGame
                 new Weapon("Knight's Sword", 10, Weapon.eWeaponType.Sword, "Normal", new Stats(5, 2, 0)),
                 new Weapon("Blade of Valor", 15, Weapon.eWeaponType.Sword, "Rare", new Stats(7, 3, 0)),
                 new Weapon("Guardian's Edge", 20, Weapon.eWeaponType.Sword, "Epic", new Stats(8, 4, 1)),
-                new Weapon("Excalibur", 25, Weapon.eWeaponType.Sword, "Legendary", new Stats(10, 5, 2)),
+                new Weapon("Excalibur", 25, Weapon.eWeaponType.Sword, "Legendary", new Stats(12, 6, 2)),
 
                 // Axes, Hög Strength, Lite stamina, ingen intelligence.
-                new Weapon("Lumberjack Axe", 12, Weapon.eWeaponType.Axe, "Normal", new Stats(9, 1, 0)),
-                new Weapon("Berserker Cleaver", 18, Weapon.eWeaponType.Axe, "Rare", new Stats(12, 2, 0)),
-                new Weapon("Battle Axe of Rage", 22, Weapon.eWeaponType.Axe, "Epic", new Stats(14, 3, 1)),
-                new Weapon("Destroyer's Hatchet", 28, Weapon.eWeaponType.Axe, "Legendary", new Stats(17, 4, 2)),
+                new Weapon("Lumberjack Axe", 12, Weapon.eWeaponType.Axe, "Normal", new Stats(7, 1, 0)),
+                new Weapon("Berserker Cleaver", 18, Weapon.eWeaponType.Axe, "Rare", new Stats(10, 2, 0)),
+                new Weapon("Battle Axe of Rage", 22, Weapon.eWeaponType.Axe, "Epic", new Stats(13, 3, 1)),
+                new Weapon("Destroyer's Hatchet", 28, Weapon.eWeaponType.Axe, "Legendary", new Stats(16, 4, 2)),
 
                 // Maces, Blandade stats från alla.
                 new Weapon("Iron Mace", 8, Weapon.eWeaponType.Mace, "Normal", new Stats(3, 3, 2)),

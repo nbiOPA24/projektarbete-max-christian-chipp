@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 using System.Text;
@@ -12,32 +13,42 @@ namespace TutorialTheGame
         public double Strength { get; set; }
         public double Stamina { get; set; }
         public double Intelligence { get; set; }
+        //public double StatMultiplier {get ; set;} = 1.0; // TEST
         public Stats (double strength, double stamina, double intelligence)
         {
-            Strength = strength; //* 0.25;  //kanske göra om till heltal istället och gör
+            Strength = strength; // 0.25;  //kanske göra om till heltal istället och gör
             Stamina = stamina; //* 0.3;
             Intelligence = intelligence; //* 0.3;
         }
         // metoder för att räkna ut attackskada / stamina / mana
-        public double CalculateStrength(double strength, double playerDamage) // kanske försöka streamlina lite och göra en metod om det går? maybe baby
+        public static double CalculateStrength(double strength)//, double StatMultiplier) // test metod 
+        {
+            
+            return strength * 1; //* StatMultiplier;
+        }
+        public double CalculateStrengthh(double strength, double playerDamage) // kanske försöka streamlina lite och göra en metod om det går? maybe baby
         {
             playerDamage = playerDamage * (strength * 0.3);
             return playerDamage;
         }
-        public double CalculateStamina(double stamina, double playerHealth)
+        public static double CalculateStamina(double stamina)//, double StatMultiplier)
         {
-            playerHealth = playerHealth * (stamina * 0.3);
-            return playerHealth;
+            /*double playerHealthh = playerHealth * (stamina * 0.3);
+            return playerHealthh; */
+            return stamina * 1; //* StatMultiplier;
         }
 
-        public double CalculateIntelligence(double intelligence, double playerMana)
+        public static double CalculateIntelligence(double intelligencee)//, double StatMultiplier) //double playerManaa)
         {
-            playerMana = playerMana * (intelligence * 0.3);
-            return playerMana;
+           // playerMana = playerMana * (intelligence * 0.3);
+           /* double CalcMana = playerManaa * (intelligencee * 0.3);
+            Console.WriteLine($"Calculating Intelligence: Base Mana = {playerManaa}, Intelligence Multiplier = {intelligencee}, Result = {CalcMana}");
+            return CalcMana; */
+            return intelligencee * 1; // * StatMultiplier;
         }
 
         // Metod för att öka statsen, du får olika alternativ sen ökar den på poängen
-        public void IncreaseStats(int pointsAvailable)
+        public void IncreaseStats(int pointsAvailable, Player player)
         {
             while (pointsAvailable > 0)
             {
@@ -52,6 +63,7 @@ namespace TutorialTheGame
                     {
                         case "1":
                             Strength += points;
+                            //playerStats.Strength += points;
                             Console.WriteLine($"Strength increased by {points}. New Strength: {Strength}");
                             break;
                         case "2":
@@ -59,6 +71,7 @@ namespace TutorialTheGame
                             Console.WriteLine($"Stamina increased by {points}. New Stamina: {Stamina}");
                             break;
                         case "3":
+                            //Intelligence += points;
                             Intelligence += points;
                             Console.WriteLine($"Intelligence increased by {points}. New Intelligence: {Intelligence}");
                             break;
@@ -73,6 +86,7 @@ namespace TutorialTheGame
                     Ui.InvalidInput();
                 }
             }
+            //player.UpdateStats();
             Console.WriteLine("All points have been used!");
         }
     }

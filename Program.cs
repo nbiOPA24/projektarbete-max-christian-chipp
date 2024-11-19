@@ -21,8 +21,10 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
     static void Main(string[] args)
     {
         //instanserar lite klasser och skapar en spelare
-        Stats playerStats = new Stats(10,100,5);
-        Player player = new Player("BitchAss", playerStats);
+        //Stats playerStats = new Stats(10,100,50);
+        Ui.AskForName();
+        string name = Console.ReadLine();       
+        Player player = new Player(name); //("BitchAss");//, playerStats);
         //CharacterSpells spells = new CharacterSpells();
         //GameSaver gameSaver = new GameSaver();
         //Player player = gameSaver.LoadOrMakePlayer();
@@ -45,7 +47,10 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
                 Console.WriteLine("Failed to load game. Starting a new game.");
             }
         } 
-                
+        /* Ui.IntroStory(player);
+        Ui.PressKeyContinue();
+        Ui.FirstFloorStory();
+        Ui.PressKeyContinue(); */
         // spelloop - spelet körs så länge spelaren har hälsa kvar och inte har klarat spelet
         while (player.PlayerHealth > 0 && !gameCompleted) 
         {
@@ -76,7 +81,7 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
 
                 // Kontrollera om spelaren har dött, isf avsluta mainloopen
                 if (player.PlayerHealth <= 0)
-                {   
+                {   Console.WriteLine(player.PlayerHealth); //tilffäligt
                     Ui.DeathMessage();
                     Console.ReadKey(); 
                     break;
@@ -84,7 +89,7 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
                 // Vänta på att användaren ska trycka på en tangent och rensa skärmen
                 //Finish:;
                 Console.ReadKey();
-                Console.Clear();
+               // Console.Clear(); test tillfälligt för att hitta fel
             }
         }
     }
