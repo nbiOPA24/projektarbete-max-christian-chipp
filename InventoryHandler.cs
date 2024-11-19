@@ -36,6 +36,8 @@ namespace TutorialTheGame
 
             EquippedWeapon = weapon;
             Console.WriteLine($"You have equipped {Ui.DisplayWeaponInfo(weapon)}");
+            player.UpdateStats(); //test
+            Console.WriteLine($"PlayerMana after calculation: {player.PlayerMana}");
         }
         public void UnequipWeapon(Player player)//,Weapon weapon)
         {
@@ -50,6 +52,8 @@ namespace TutorialTheGame
             player.PlayerStats.Intelligence -= EquippedWeapon.WeaponStats.Intelligence;
             EquippedWeapon = null;  //eventuellt behöva ta bort från listan så det inte är duplicerat? eller kanske inte spelar roll
             Console.WriteLine($"You have unequipped your weapon"); //{Ui.DisplayWeaponInfo(weapon)}");
+            player.UpdateStats(); // test
+            Console.WriteLine($"PlayerMana after calculation: {player.PlayerMana}");
         }
         public void PickUpLoot(Weapon weapon)
         {

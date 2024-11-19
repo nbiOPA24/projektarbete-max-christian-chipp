@@ -35,7 +35,7 @@ namespace TutorialTheGame
             }
             return enemies;
         }
-        public Enemy CreateLowLevelEnemy()
+        public Enemy CreateLowLevelEnemy()  // _ är default
         {
             return random.Next(2) switch
             {
@@ -52,7 +52,7 @@ namespace TutorialTheGame
                 _ => new Assassin("Shadow Assasin", 30)
             };
         }
-        public Enemy CreateHighLevelEnemy()  //switch istället, kanske nya switch med lambda
+        public Enemy CreateHighLevelEnemy() 
         {
             return random.Next(4) switch
             {
@@ -62,7 +62,7 @@ namespace TutorialTheGame
                 _ => new Shaman("Shaman of the Forest", 40)
             };
         }
-        public Enemy CreateEnemyForFloor()
+        public Enemy CreateEnemyForFloor()  // om det är 10, skapa boss, om det är 1-3 skapa low, 4-6 mid, 7-9 highlevel, måste ha <= => på båda sidorna.
         {
             Enemy enemy = CurrentFloor switch
             {

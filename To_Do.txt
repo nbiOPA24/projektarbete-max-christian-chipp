@@ -6,16 +6,16 @@
 						*** Enemies  ------------ Göra till json?
 						*** Enemy Boss  bara boolen kvar? 
 						*** Exp system ---------
- 						*** Stat system  --------- fixa så mana ökas med intelligence???
-						*** Lägga till floors -------- göra om till switch case
+ 						*** Stat system  --------- fixa så mana ökas med intelligence??? och sätta max tak på hp/mana, och även regga mana
+						*** Lägga till floors -------- 
 						*** Character klass ------
-						** Character spells    Eventuell level restriction / unlock
+						** Character spells    -------- Hantera kalkyl med intelligence.
 						** Sparning med Json bara hantera lite buggar kvar, lägga till enemies med en array
 						*** Loot -------- pots/guld ? eller ta det om jag hinner göra en shop
 						*** Vapen  ------- lite mindre chans att droppa
 						*** Inventory  Felsöka equip metoden / unequip, dubbelchecka ifall man kan göra så man inte blir attackerad.
-						** UI  lägga till lite färg kanske, lägga till displayStats,
-						* Göra lite story text och lägga till threadsleep.
+						** UI  lägga till lite färg kanske, lägga till displayStats, ändra om från siffror till bokstäver? göra så man kan gå tbx.
+						* story. Bara lägga in dom nu där dom ska vara!
 						* Lägga till Warrior attacker också
 						* Shop / eventuell guld? potions?, isåfall även lägga till olika floors med merchants eller en slav som följer dig.
 						* Välja start ras med försatta stat poäng, samt även kunna bestämma sitte egna namn.
