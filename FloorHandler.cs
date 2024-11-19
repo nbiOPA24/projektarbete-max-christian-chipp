@@ -37,75 +37,40 @@ namespace TutorialTheGame
         }
         public Enemy CreateLowLevelEnemy()
         {
-            int type = random.Next(2);
-
-            if (type == 0)
+            return random.Next(2) switch
             {
-                return new Mage("Apprentice Mage", 20);
-            }
-            else
-            {
-                return new Assassin("Novice Assasin", 20);
-            }
+                0 => new Mage("Apprentice Mage", 200),
+                _ => new Assassin("Novice Assasin", 200)
+            };
         }
         public Enemy CreateMidLevelEnemy()
         {
-            int type = random.Next(3);
-            if (type == 0)
+            return random.Next(3) switch
             {
-                return new Mage("Occultist Mage", 30);
-            }
-            else if (type == 1)
-            {
-                return new Warrior("Orc Warrior", 30);
-            }
-            else 
-            {
-                return new Assassin("Shadow Assasin", 30);
-            }
+                1 => new Mage("Occultist Mage", 30),
+                2 => new Warrior("Orc Warrior", 30),
+                _ => new Assassin("Shadow Assasin", 30)
+            };
         }
         public Enemy CreateHighLevelEnemy()  //switch istället, kanske nya switch med lambda
         {
-            int type = random.Next(4);
-
-            if (type == 0)
+            return random.Next(4) switch
             {
-                return new Mage("Witch of Fire", 40);
-            }
-            else if (type == 1)
-            {
-                return new Warrior("Elite Warrior", 40);
-            }
-            else if (type == 2)
-            {
-                return new Assassin("Ninja of West", 40);
-            }
-            else
-            {
-                return new Shaman("Shaman of the Forest", 40);
-            }            
-            
+                1 => new Mage("Witch of Fire", 40),
+                2 => new Warrior("Elite Warrior", 40),
+                3 => new Assassin("Ninja of West", 40),
+                _ => new Shaman("Shaman of the Forest", 40)
+            };
         }
-    
         public Enemy CreateEnemyForFloor()
         {
-            Enemy enemy;
-            if (CurrentFloor == 10)
+            Enemy enemy = CurrentFloor switch
             {
-                enemy = new Boss("Trangius");
-            }
-            else if (CurrentFloor <= 3)
-            {
-                enemy = CreateLowLevelEnemy();
-            }
-            else if (CurrentFloor <= 6)
-            {
-                enemy = CreateMidLevelEnemy();
-            }
-            else  //(CurrentFloor <= 9)
-            {
-                enemy = CreateHighLevelEnemy();
-            }
+                10 => new Boss("Trangius"),
+                <= 3 => CreateLowLevelEnemy(),
+                <= 6 => CreateMidLevelEnemy(),
+                _ => CreateHighLevelEnemy()
+            };
             enemy.MakeEnemyStronger(CurrentFloor);
             return enemy;
         }
