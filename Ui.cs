@@ -20,12 +20,12 @@ namespace TutorialTheGame
         }
         public static void SpellOptions()
         {
-            Console.WriteLine("Choose a spell:");
-            Console.WriteLine("1. Fireball");
-            Console.WriteLine("2. Lightning Strike");
-            Console.WriteLine("3. Arcane Blast");
-            Console.WriteLine("4. Poison Cloud");
-            Console.WriteLine("5. Ice Shield");
+            Console.WriteLine("Choose a spell: Required Level.");
+            Console.WriteLine("1. Fireball, 1");
+            Console.WriteLine("2. Lightning Strike, 4");
+            Console.WriteLine("3. Arcane Blast, 5");
+            Console.WriteLine("4. Poison Cloud, 3");
+            Console.WriteLine("5. Ice Shield, 2");
             Console.Write("Choose 1-5: ");
         }
         public static void DisplayInfo(Player player, FloorHandler floorHandler)
@@ -96,7 +96,7 @@ namespace TutorialTheGame
             Console.WriteLine("1. Increase Strength");
             Console.WriteLine("2. Increase Stamina");
             Console.WriteLine("3. Increase Intelligence");
-            Console.Write("Choose where to allocate your points (1-3): ");
+            Console.Write("Choose where to add your points (1-3): ");
         }
         public static string DisplayWeaponInfo(Weapon weapon)
         {

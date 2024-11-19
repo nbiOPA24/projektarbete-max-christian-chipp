@@ -22,14 +22,23 @@ namespace TutorialTheGame
             Console.WriteLine("You don't have enough mana to cast this spell."); 
             return false; 
         }
+        public bool HasRequiredLevel(Player player, int requiredLevel)
+        {
+            if (player.Level >= requiredLevel)
+            {
+                return true;
+            }
+            Console.WriteLine($"You need to be at least level {requiredLevel} to cast this spell.");
+            return false;
+        }
         public double Fireball(Player player)
         {
             int BaseDamage = 30;
             int manaCost = 20;
 
-            if (HasEnoughMana(player,manaCost))
+            if (HasEnoughMana(player,manaCost) && HasRequiredLevel(player, 1))
             { //A basic fire spell that deals damage to a single enemy
-                double damage = BaseDamage * player.PlayerStats.Intelligence + random.Next(0, 30);
+                double damage = BaseDamage * (0.1 *player.PlayerStats.Intelligence) + random.Next(0, 30);
                 Console.WriteLine($"Fireball! has been cast for {damage} it's super effective!");
                 Ui.SmallLine();
                 player.PlayerMana -= manaCost;
@@ -43,7 +52,7 @@ namespace TutorialTheGame
             int BaseDamage = 30;
             int manaCost = 25;
 
-            if (HasEnoughMana(player,manaCost))
+            if (HasEnoughMana(player,manaCost) && HasRequiredLevel(player, 4))
             {
                 double damage = BaseDamage * player.PlayerStats.Intelligence + random.Next(0, 30);
                 Console.WriteLine($"Lightning Srike zaps you for {damage}!");
@@ -60,7 +69,7 @@ namespace TutorialTheGame
             int BaseDamage = 40;
             int manaCost = 30;
 
-            if (HasEnoughMana(player,manaCost))
+            if (HasEnoughMana(player,manaCost) && HasRequiredLevel(player, 5))
             {
                 double damage = BaseDamage * player.PlayerStats.Intelligence + random.Next(0, 30);
                 Console.WriteLine($"Casts Arcane Blast for {damage}!");
@@ -76,7 +85,7 @@ namespace TutorialTheGame
             int BaseDamage = 10;
             int manaCost = 15;
 
-            if (HasEnoughMana(player,manaCost))
+            if (HasEnoughMana(player,manaCost) && HasRequiredLevel(player, 3))
             {
                 player.PlayerMana -= manaCost;
                 foreach (Enemy enemy in enemies)
@@ -94,7 +103,7 @@ namespace TutorialTheGame
             int baseShieldStrength = 40;
             int manaCost = 20;
 
-            if (HasEnoughMana(player,manaCost))
+            if (HasEnoughMana(player,manaCost) && HasRequiredLevel(player, 2))
             {
                 double shieldStrength = baseShieldStrength * player.PlayerStats.Intelligence + random.Next(0, 30);
                 player.ShieldStrength = shieldStrength;
