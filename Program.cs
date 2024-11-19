@@ -63,7 +63,6 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
                 Ui.MenuOptions(); // Val mellan 1-6 för attack, heal, spell, save, quit, inventory
 
                 action.PlayerAction(player, enemies); // man gör sin tur, attack/heal/spell
-                
                 action.EnemiesAction(player, enemies); // enemeies attackerar
 
                 if (enemies.Count == 0) // ser till att du går upp i nivå / klarar spelet

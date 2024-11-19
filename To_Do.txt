@@ -6,14 +6,14 @@
 						*** Enemies  ------------ Göra till json?
 						*** Enemy Boss  bara boolen kvar? 
 						*** Exp system ---------
- 						*** Stat system  --------- fixa så mana ökas med intelligence??? och sätta max tak på hp/mana, och även regga mana
+ 						*** Stat system  --------- sätta max tak på hp/mana, och även regga mana
 						*** Lägga till floors -------- 
 						*** Character klass ------
-						** Character spells    -------- Hantera kalkyl med intelligence.
+						** Character spells    -------- 
 						** Sparning med Json bara hantera lite buggar kvar, lägga till enemies med en array
 						*** Loot -------- pots/guld ? eller ta det om jag hinner göra en shop
 						*** Vapen  ------- lite mindre chans att droppa
-						*** Inventory  Felsöka equip metoden / unequip, dubbelchecka ifall man kan göra så man inte blir attackerad.
+						*** Inventory  dubbelchecka ifall man kan göra så man inte blir attackerad.
 						** UI  lägga till lite färg kanske, lägga till displayStats, ändra om från siffror till bokstäver? göra så man kan gå tbx.
 						* story. Bara lägga in dom nu där dom ska vara!
 						* Lägga till Warrior attacker också

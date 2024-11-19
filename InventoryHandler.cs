@@ -29,12 +29,12 @@ namespace TutorialTheGame
             {
                 UnequipWeapon(player);//, weapon);
             }
-            player.PlayerDamage += weapon.Damage;
+           //player.PlayerDamage += weapon.Damage;
+            EquippedWeapon = weapon;
             player.PlayerStats.Strength += weapon.WeaponStats.Strength;
             player.PlayerStats.Stamina += weapon.WeaponStats.Stamina;
-            player.PlayerStats.Intelligence += weapon.WeaponStats.Intelligence;
+            player.PlayerStats.Intelligence += weapon.WeaponStats.Intelligence; 
 
-            EquippedWeapon = weapon;
             Console.WriteLine($"You have equipped {Ui.DisplayWeaponInfo(weapon)}");
             player.UpdateStats(); //test
             Console.WriteLine($"PlayerMana after calculation: {player.PlayerMana}");
@@ -46,11 +46,11 @@ namespace TutorialTheGame
                 Console.WriteLine("No weapon equipped");
                 return;
             }
-            player.PlayerDamage -= EquippedWeapon.Damage;
+            //player.PlayerDamage -= EquippedWeapon.Damage;
             player.PlayerStats.Strength -= EquippedWeapon.WeaponStats.Strength;
             player.PlayerStats.Stamina -= EquippedWeapon.WeaponStats.Stamina;
             player.PlayerStats.Intelligence -= EquippedWeapon.WeaponStats.Intelligence;
-            EquippedWeapon = null;  //eventuellt behöva ta bort från listan så det inte är duplicerat? eller kanske inte spelar roll
+            EquippedWeapon = null;  //eventuellt behöva ta bort från listan så det inte är duplicerat? eller kanske inte spelar roll */
             Console.WriteLine($"You have unequipped your weapon"); //{Ui.DisplayWeaponInfo(weapon)}");
             player.UpdateStats(); // test
             Console.WriteLine($"PlayerMana after calculation: {player.PlayerMana}");

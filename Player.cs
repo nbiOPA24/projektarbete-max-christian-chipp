@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Dynamic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.XPath;
@@ -47,9 +48,9 @@ namespace TutorialTheGame
         }
         public void UpdateStats() //tillfällig skit för att räkna ut problemet
         {
-            PlayerMana = BaseMana + PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 1);
-            PlayerHealth = BaseHealth + PlayerStats.CalculateStamina(PlayerStats.Stamina, 1); //1000
-            PlayerDamage = BaseDamage + PlayerStats.CalculateStrength(PlayerStats.Strength, 1); //2000
+            PlayerMana = BaseMana + Stats.CalculateIntelligence(PlayerStats.Intelligence);
+            PlayerHealth = BaseHealth + Stats.CalculateStamina(PlayerStats.Stamina); //1000
+            PlayerDamage = BaseDamage + (InventoryHandler.EquippedWeapon != null ? InventoryHandler.EquippedWeapon.Damage : 0) + Stats.CalculateStrength(PlayerStats.Strength);//InventoryHandler.EquippedWeapon.Damage + Stats.CalculateStrength(PlayerStats.Strength); //2000
             Console.WriteLine($"PlayerMana after calculation: {PlayerMana}, dmg = {PlayerDamage}, stam = {PlayerHealth}");
         }
         public void AddExperience(int xp)
