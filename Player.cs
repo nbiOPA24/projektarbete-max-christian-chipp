@@ -35,9 +35,6 @@ namespace TutorialTheGame
             Name = name;
             PlayerStats = new Stats(10, 10, 10);
             InventoryHandler = new InventoryHandler(this);
-           /* PlayerHealth = PlayerStats.CalculateStamina(PlayerStats.Stamina, 100); //1000
-            PlayerDamage = 60;//PlayerStats.CalculateStrength(PlayerStats.Strength, 15); //2000
-            PlayerMana = PlayerStats.CalculateIntelligence(PlayerStats.Intelligence, 10);//(PlayerStats.Intelligence, 0); // 500 */
             BaseHealth = 1000;
             BaseDamage = 100;   // TEST
             BaseMana = 100;
@@ -45,19 +42,19 @@ namespace TutorialTheGame
             ShieldStrength = 0;
             Experience = 0;
             Level = 1;
-            Console.WriteLine($"PlayerMana after calculation: {PlayerMana} dmg = {PlayerDamage} strength = {PlayerStats.Strength}, stam = {PlayerHealth}");
             UpdateStats(); // test
             PlayerHealth = MaxHealth; //sätter grund värden för spelstart här så spelet startas.
             PlayerMana = MaxMana;
         }
-        public void UpdateStats() //tillfällig skit för att räkna ut problemet
-        { //PlayerMana + PlayerHealth
+        public void UpdateStats() //Updaterar statsen, utan denna så ökas inte statsen som tänkt.
+        { 
             MaxMana = BaseMana + Stats.CalculateIntelligence(PlayerStats.Intelligence);
             MaxHealth = BaseHealth + Stats.CalculateStamina(PlayerStats.Stamina); //1000
             PlayerMana = Math.Min(PlayerMana, MaxMana);
             PlayerHealth = Math.Min(PlayerHealth,MaxHealth); //använder math.Min för att få ett värde som inte överskrider max hp
-            PlayerDamage = BaseDamage + (InventoryHandler.EquippedWeapon != null ? InventoryHandler.EquippedWeapon.Damage : 0) + Stats.CalculateStrength(PlayerStats.Strength);//InventoryHandler.EquippedWeapon.Damage + Stats.CalculateStrength(PlayerStats.Strength); //2000
-            Console.WriteLine($"PlayerMana after calculation: {PlayerMana}/{MaxMana}, dmg = {PlayerDamage}, stam = {PlayerHealth}/{MaxHealth}");
+            PlayerDamage = BaseDamage 
+             + (InventoryHandler.EquippedWeapon != null ? InventoryHandler.EquippedWeapon.Damage : 0) // kontroll för vapen stats (+ om du inte har vapen), utan den så kraschar spelet
+             + Stats.CalculateStrength(PlayerStats.Strength);
         }
         public void AddExperience(int xp)
         {
@@ -117,7 +114,6 @@ namespace TutorialTheGame
             {
                 PlayerMana = MaxMana;
             }
-            Console.WriteLine($"Mana {PlayerMana} {MaxMana}");
         }
         public void AttackEnemy(Enemy enemy)
         {
