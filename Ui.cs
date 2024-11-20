@@ -29,15 +29,26 @@ namespace TutorialTheGame
             Console.WriteLine("5. Ice Shield, 2");
             Console.Write("Choose 1-5: ");
         }
+        /*  public static void DisplayInfo(Player player, FloorHandler floorHandler)
+          {
+              BigLine();
+              Console.WriteLine($"You have {player.PlayerHealth} / {player.MaxHealth} HP left");
+              Console.WriteLine($"You have {player.PlayerMana} / {player.MaxMana} Mana left");
+              Console.WriteLine($"You have {player.Experience} / {player.GetExperienceForNextLevel()} XP");   // sätta in en character display kanske istället? eller visa staten med inventoryt?
+              Console.WriteLine($"Dmg = {player.PlayerDamage}, Str = {player.PlayerStats.Strength}, Stam = {player.PlayerStats.Stamina}, Int = {player.PlayerStats.Intelligence}"); //preliminär för felsökning
+              Console.WriteLine($"You are on floor {floorHandler.CurrentFloor}");
+              BigLine();
+          } */
         public static void DisplayInfo(Player player, FloorHandler floorHandler)
         {
             BigLine();
-            Console.WriteLine($"You have {player.PlayerHealth} HP left");
-            Console.WriteLine($"You have {player.PlayerMana} Mana Left");
+            WriteColoredStat("You have ", $"{player.PlayerHealth}", ConsoleColor.Red, " / ", $"{player.MaxHealth}", " HP left");
+            WriteColoredStat("You have ", $"{player.PlayerMana}", ConsoleColor.Cyan, " / ", $"{player.MaxMana}", " Mana left");
+            WriteColoredStat("You have ", $"{player.Experience}", ConsoleColor.Yellow, " / ", $"{player.GetExperienceForNextLevel()}", " XP");
+            Console.WriteLine($"Dmg = {player.PlayerDamage}, Str = {player.PlayerStats.Strength}, Stam = {player.PlayerStats.Stamina}, Int = {player.PlayerStats.Intelligence}");
+            //WriteColoredStat("Damage = ", $"{player.PlayerDamage}", ConsoleColor.Green, $", Strength = {player.PlayerStats.Strength}, Stamina = {player.PlayerStats.Stamina}, Intelligence = {player.PlayerStats.Intelligence}");
             Console.WriteLine($"You are on floor {floorHandler.CurrentFloor}");
-            Console.WriteLine($"You have {player.Experience} / {player.GetExperienceForNextLevel()} XP");   // sätta in en character display kanske istället? eller visa staten med inventoryt?
             BigLine();
-            Console.WriteLine($"Stamina = {player.PlayerStats.Stamina}, Damage = {player.PlayerDamage}, st{player.PlayerStats.Strength} int {player.PlayerStats.Intelligence}"); //preliminär för felsökning
         }
         public static void DisplayEnemies(List<Enemy> enemies)
         {
@@ -61,6 +72,31 @@ namespace TutorialTheGame
         public static void BigLine()
         {
             Console.WriteLine("========================================");
+        }
+        public static void WriteColoredStat(string prefix, string value1, ConsoleColor color, string middleText, string value2, string suffix)
+        {  // slaveGPT metod för att få lite roliga färger, kände inte att det va så spännade/lärorikt att göra själv
+            // Skriver prefixet i standardfärg (vit)
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(prefix);
+
+            // Skriver första värdet i vald färg
+            Console.ForegroundColor = color;
+            Console.Write(value1);
+
+            // Skriver mellantexten i standardfärg (vit)
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(middleText);
+
+            // Skriver andra värdet i vald färg
+            Console.ForegroundColor = color;
+            Console.Write(value2);
+
+            // Skriver suffixet i standardfärg (vit)
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(suffix);
+
+            // Återställ färg
+            Console.ResetColor();
         }
         public static void DeathMessage()
         {
