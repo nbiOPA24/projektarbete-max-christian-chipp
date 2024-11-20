@@ -27,6 +27,8 @@ namespace TutorialTheGame
         public double BaseHealth { get; set; } // TEST
         public double BaseDamage { get; set; }
         public double BaseMana { get; set; }
+        public double MaxMana { get; set; } //test
+        public double MaxHealth { get; set; } //test
 
         public Player(string name)
         {
@@ -45,13 +47,17 @@ namespace TutorialTheGame
             Level = 1;
             Console.WriteLine($"PlayerMana after calculation: {PlayerMana} dmg = {PlayerDamage} strength = {PlayerStats.Strength}, stam = {PlayerHealth}");
             UpdateStats(); // test
+            PlayerHealth = MaxHealth; //sätter grund värden för spelstart här så spelet startas.
+            PlayerMana = MaxMana;
         }
         public void UpdateStats() //tillfällig skit för att räkna ut problemet
-        {
-            PlayerMana = BaseMana + Stats.CalculateIntelligence(PlayerStats.Intelligence);
-            PlayerHealth = BaseHealth + Stats.CalculateStamina(PlayerStats.Stamina); //1000
+        { //PlayerMana + PlayerHealth
+            MaxMana = BaseMana + Stats.CalculateIntelligence(PlayerStats.Intelligence);
+            MaxHealth = BaseHealth + Stats.CalculateStamina(PlayerStats.Stamina); //1000
+            PlayerMana = Math.Min(PlayerMana, MaxMana);
+            PlayerHealth = Math.Min(PlayerHealth,MaxHealth); //använder math.Min för att få ett värde som inte överskrider max hp
             PlayerDamage = BaseDamage + (InventoryHandler.EquippedWeapon != null ? InventoryHandler.EquippedWeapon.Damage : 0) + Stats.CalculateStrength(PlayerStats.Strength);//InventoryHandler.EquippedWeapon.Damage + Stats.CalculateStrength(PlayerStats.Strength); //2000
-            Console.WriteLine($"PlayerMana after calculation: {PlayerMana}, dmg = {PlayerDamage}, stam = {PlayerHealth}");
+            Console.WriteLine($"PlayerMana after calculation: {PlayerMana}/{MaxMana}, dmg = {PlayerDamage}, stam = {PlayerHealth}/{MaxHealth}");
         }
         public void AddExperience(int xp)
         {
@@ -83,7 +89,7 @@ namespace TutorialTheGame
                 ShieldStrength -= shieldAbsorbed;
                 Console.WriteLine($"Your ice shield absorbed {shieldAbsorbed} damage! remaining shield: {ShieldStrength}");
                
-                if (ShieldStrength <= 0 && !isShieldBroken)
+                if (ShieldStrength <= 0 && !isShieldBroken) /// boooooool
                 {
                     Console.WriteLine($"Ice shield is broken you take {damage} damage");
                     // onödig men ja. isShieldBroken = true;
@@ -98,7 +104,20 @@ namespace TutorialTheGame
         public void Heal(int amount)
         {
             PlayerHealth += amount;
-            Console.WriteLine($"{Name} healed for {amount}. Current Health: {PlayerHealth}");
+            if (PlayerHealth > MaxHealth)
+            {
+                PlayerHealth = MaxHealth;
+            }
+            Console.WriteLine($"{Name} healed for {amount}. Current Health: {PlayerHealth}/{MaxHealth}");
+        }
+        public void ManaRegeneration() //bus enkel metod för att öka mana, körs efter varje enemy action
+        {
+            PlayerMana += 10;
+            if (PlayerMana > MaxMana)
+            {
+                PlayerMana = MaxMana;
+            }
+            Console.WriteLine($"Mana {PlayerMana} {MaxMana}");
         }
         public void AttackEnemy(Enemy enemy)
         {

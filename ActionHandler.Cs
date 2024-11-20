@@ -17,10 +17,9 @@ namespace TutorialTheGame
 
             switch (input)
             {
-                case "1":
+               case "1":
                     AttackAction(player, enemies);
                     break;
-
                 case "2":
                     player.Heal(50 + random.Next(0, 30));
                     break;
@@ -104,6 +103,7 @@ namespace TutorialTheGame
                     player.TakeDamage(enemies[i].Attack());
                 }
             }
+            player.ManaRegeneration(); // kör enkel metod för att öka players mana med 10.
         }
 
         // Visar först val för spells, sen beroende på vilka sifra du väljer så får du single target eller aoe/shield metoden. 
