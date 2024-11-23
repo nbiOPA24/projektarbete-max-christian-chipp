@@ -1,14 +1,9 @@
 ﻿﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Dynamic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.XPath;
+using TutorialTheGame.Enemies;
+using TutorialTheGame.GameHandler;
+using TutorialTheGame.LootHandler;
 
-namespace TutorialTheGame
+namespace TutorialTheGame.PlayerChar
 {
     public class Player
     {
@@ -35,14 +30,14 @@ namespace TutorialTheGame
             Name = name;
             PlayerStats = new Stats(10, 10, 10);
             InventoryHandler = new InventoryHandler(this);
-            BaseHealth = 1000;
-            BaseDamage = 100;   // TEST
+            BaseHealth = 400;
+            BaseDamage = 30;   // sätter grund värden här så att vi kan starta spelet och beräkna senare med stats.
             BaseMana = 100;
             Armor = 0;
             ShieldStrength = 0;
             Experience = 0;
             Level = 1;
-            UpdateStats(); // test
+            UpdateStats();
             PlayerHealth = MaxHealth; //sätter grund värden för spelstart här så spelet startas.
             PlayerMana = MaxMana;
         }
@@ -67,7 +62,7 @@ namespace TutorialTheGame
         }
         public int GetExperienceForNextLevel()
         {
-            return Level * 100; // första test med 100
+            return Level * 100; 
         }
         private void LevelUp()
         {
@@ -78,7 +73,6 @@ namespace TutorialTheGame
         }
         public void TakeDamage(double damage)
         {
-            bool isShieldBroken = false;
             if (ShieldStrength > 0)
             {
                 double shieldAbsorbed = Math.Min(damage, ShieldStrength);
@@ -86,10 +80,9 @@ namespace TutorialTheGame
                 ShieldStrength -= shieldAbsorbed;
                 Console.WriteLine($"Your ice shield absorbed {shieldAbsorbed} damage! remaining shield: {ShieldStrength}");
                
-                if (ShieldStrength <= 0 && !isShieldBroken) /// boooooool
+                if (ShieldStrength <= 0)
                 {
                     Console.WriteLine($"Ice shield is broken you take {damage} damage");
-                    // onödig men ja. isShieldBroken = true;
                 }
             }
             double totalDamage = damage - Armor;
@@ -106,10 +99,11 @@ namespace TutorialTheGame
                 PlayerHealth = MaxHealth;
             }
             Console.WriteLine($"{Name} healed for {amount}. Current Health: {PlayerHealth}/{MaxHealth}");
+            PlayerMana -= 15;
         }
         public void ManaRegeneration() //bus enkel metod för att öka mana, körs efter varje enemy action
         {
-            PlayerMana += 10;
+            PlayerMana += 5;
             if (PlayerMana > MaxMana)
             {
                 PlayerMana = MaxMana;

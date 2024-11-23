@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TutorialTheGame.GameHandler;
 
-namespace TutorialTheGame
+namespace TutorialTheGame.Enemies
 {
     class Boss : Enemy
     {
-        bool isGiant;
         // konstruktor för bossen, anropar basklassen och sätter initiala värden.
         public Boss(string name) : base(name, 25) 
         {
@@ -16,7 +12,6 @@ namespace TutorialTheGame
             BaseDamage = 50;
             Armor = 30;
             Mana = 0;
-            isGiant = true;  // vad är denna till för ? framtid tanke? kanske öka defense/armor när den är aktiv, men är det värt det?
         }
 
 

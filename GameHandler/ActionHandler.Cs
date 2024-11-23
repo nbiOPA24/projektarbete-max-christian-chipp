@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-namespace TutorialTheGame
+using TutorialTheGame.Enemies;
+using TutorialTheGame.LootHandler;
+using TutorialTheGame.PlayerChar;
+
+
+namespace TutorialTheGame.GameHandler
 {
     public class PlayerActionHandler
     {
         private CharacterSpells spells = new CharacterSpells();  //behöver vara private annars funkar inte spelet
-        public Random random = new Random(); 
+        private Random random = new Random(); 
         public List<int> invisibleEnemyIndexes = new List<int>();
 
         // Här väljer du vad du vill göra, Attack, Heal, casta spell, spara spelet, avsluta, inventory.   kanske lägga till display stats?
@@ -30,7 +34,6 @@ namespace TutorialTheGame
 
                 case "4":
                     GameDataManager.SaveGame(player, "savegame.json");
-                    Console.WriteLine("Game saved!");
                     break;
 
                 case "5":
@@ -39,7 +42,6 @@ namespace TutorialTheGame
                     break;
 
                 case "6":
-                    player.InventoryHandler.ShowInventory();
                     inventoryAction(player);
                     break;
                
@@ -176,6 +178,7 @@ namespace TutorialTheGame
                     break;
             }
         }
+        // hanterar inventarie action
         public void inventoryAction(Player player)
         {
             bool checkInventory = true;
@@ -230,7 +233,7 @@ namespace TutorialTheGame
                         Ui.InvalidInput();
                         break;
                 }
-                Console.ReadKey();
+                Ui.PressKeyContinue();
             }
         }
     }

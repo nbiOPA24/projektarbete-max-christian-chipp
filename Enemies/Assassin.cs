@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TutorialTheGame.GameHandler;
 
-namespace TutorialTheGame
+namespace TutorialTheGame.Enemies
 {
     class Assassin : Enemy
     {

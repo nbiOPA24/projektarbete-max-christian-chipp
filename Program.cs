@@ -1,33 +1,15 @@
 ﻿using System.Collections.Generic;
 using System;
-using TutorialTheGame;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using System.Transactions;
-// -------TO DO LIST---------
-// ** Får sätta ut 10 stat points i början på sin karaktär (stamina, mana, strength), för om man vill vara warrior, mage eller assasin
-// Justera Stat/skada samt enemy hp
-// Total damage display
-// Frame symbols saved for later (possible) use:
-// ╔══╦══╗  ╔═════╗  ╔══╤══╗
-// ║  ║  ║  ╠═════╣  ║  |  ║
-// ╚══╩══╝  ╚═════╝  ╚══╧══╝
-// ╔╗
-// ║║           läggat ill threadsleep på enemy attacker
-// ╚╝
-static class Program //skriva metoder på menyn istället så det inte blir stökigt, samma med ui  // lägga till xp på xp display // ändra så shaman inte healer död // fixa turn så du kan gå igenom inventory utan att bli attakerad
+using TutorialTheGame.Enemies;
+using TutorialTheGame.GameHandler;
+using TutorialTheGame.PlayerChar;
+static class Program 
 {
     static void Main(string[] args)
     {
-        //instanserar lite klasser och skapar en spelare
-        //Stats playerStats = new Stats(10,100,50);
         Ui.AskForName();
         string name = Console.ReadLine();       
-        Player player = new Player(name); //("BitchAss");//, playerStats);
-        //CharacterSpells spells = new CharacterSpells();
-        //GameSaver gameSaver = new GameSaver();
-        //Player player = gameSaver.LoadOrMakePlayer();
+        Player player = new Player(name);
         FloorHandler floorHandler = new FloorHandler();
         PlayerActionHandler action = new PlayerActionHandler();
         bool gameCompleted = false;
@@ -47,10 +29,11 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
                 Console.WriteLine("Failed to load game. Starting a new game.");
             }
         } 
-        /* Ui.IntroStory(player);
+        // Intro story för spelet.
+        Ui.IntroStory(player);
         Ui.PressKeyContinue();
         Ui.FirstFloorStory();
-        Ui.PressKeyContinue(); */
+        Ui.PressKeyContinue(); 
         // spelloop - spelet körs så länge spelaren har hälsa kvar och inte har klarat spelet
         while (player.PlayerHealth > 0 && !gameCompleted) 
         {
@@ -69,7 +52,10 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
                 {
                     if (floorHandler.CurrentFloor < 10)
                     {
+                        if (floorHandler.CurrentFloor == 3) { Ui.MidLevelStory(); }
+                        else if (floorHandler.CurrentFloor == 6) { Ui.HighLevelStory(); }
                         floorHandler.AdvanceFloor();
+                        if (floorHandler.CurrentFloor == 10) {Ui.BossLevelStory(); }
                     }
                     else
                     {
@@ -87,9 +73,7 @@ static class Program //skriva metoder på menyn istället så det inte blir stö
                     break;
                 }
                 // Vänta på att användaren ska trycka på en tangent och rensa skärmen
-                //Finish:;
-                Console.ReadKey();
-               // Console.Clear(); test tillfälligt för att hitta fel
+                Ui.PressKeyContinue();
             }
         }
     }

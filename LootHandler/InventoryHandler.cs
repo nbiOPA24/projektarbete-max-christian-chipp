@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Dynamic;
-namespace TutorialTheGame
+using TutorialTheGame.GameHandler;
+using TutorialTheGame.PlayerChar;
+
+namespace TutorialTheGame.LootHandler
 {
     public class InventoryHandler
     {
@@ -18,42 +19,40 @@ namespace TutorialTheGame
         public void ShowInventory()
         {
             Console.WriteLine("Your Inventory:");
-            foreach (var weapon in Inventory)
+            for (int i = 0; i < Inventory.Count; i++)
             {
-                Console.WriteLine(Ui.DisplayWeaponInfo(weapon));
+                Console.WriteLine($"[{i+1}] {Ui.DisplayWeaponInfo(Inventory[i])}");
             }
         }
-        public void EquipWeapon(Player player, Weapon weapon)  //möjligtvis lägga till en kontroll för med equippedweapon == weapon, men verkar inte behövas, måste dubbelchecka med 2 av samma vapen.
+        // equipar ett vapen och uppdaterar stats och dmg
+        public void EquipWeapon(Player player, Weapon weapon)
         {
             if (EquippedWeapon != null)
             {
-                UnequipWeapon(player);//, weapon);
+                UnequipWeapon(player);
             }
-           //player.PlayerDamage += weapon.Damage;
             EquippedWeapon = weapon;
+            player.PlayerDamage += weapon.Damage; 
             player.PlayerStats.Strength += weapon.WeaponStats.Strength;
             player.PlayerStats.Stamina += weapon.WeaponStats.Stamina;
             player.PlayerStats.Intelligence += weapon.WeaponStats.Intelligence; 
 
             Console.WriteLine($"You have equipped {Ui.DisplayWeaponInfo(weapon)}");
-            player.UpdateStats(); //test
-            Console.WriteLine($"PlayerMana after calculation: {player.PlayerMana}");
+            player.UpdateStats();
         }
-        public void UnequipWeapon(Player player)//,Weapon weapon)
+        public void UnequipWeapon(Player player)
         {
             if (EquippedWeapon == null)
             {
                 Console.WriteLine("No weapon equipped");
                 return;
             }
-            //player.PlayerDamage -= EquippedWeapon.Damage;
             player.PlayerStats.Strength -= EquippedWeapon.WeaponStats.Strength;
             player.PlayerStats.Stamina -= EquippedWeapon.WeaponStats.Stamina;
             player.PlayerStats.Intelligence -= EquippedWeapon.WeaponStats.Intelligence;
-            EquippedWeapon = null;  //eventuellt behöva ta bort från listan så det inte är duplicerat? eller kanske inte spelar roll */
-            Console.WriteLine($"You have unequipped your weapon"); //{Ui.DisplayWeaponInfo(weapon)}");
-            player.UpdateStats(); // test
-            Console.WriteLine($"PlayerMana after calculation: {player.PlayerMana}");
+            EquippedWeapon = null;
+            Console.WriteLine($"You have unequipped your weapon");
+            player.UpdateStats();
         }
         public void PickUpLoot(Weapon weapon)
         {

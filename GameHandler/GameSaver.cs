@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+using TutorialTheGame.PlayerChar;
 
-namespace TutorialTheGame
+namespace TutorialTheGame.GameHandler
 {
     public class GameData  //kolla json så enemies sparar sig, lägga till enemies så dom laddas in istället för att ha kod?
     {
@@ -14,34 +13,6 @@ namespace TutorialTheGame
         public double PlayerDamage { get; set; }
         public Stats PlayerStats { get; set; }
     }
-    /*public class GameSaver      detta bröt hela spelet, men hade varit nice?
-    {
-        public Player LoadOrMakePlayer()
-        {
-            
-                Console.WriteLine("Do you want to load a saved game? (y/n)");
-                string Input = Console.ReadLine().ToLower();
-
-                if (Input == "y")
-                {
-                    Player loadedPlayer = GameDataManager.LoadGame("savegame.json");
-                    if (loadedPlayer != null)
-                    {
-                        Console.WriteLine("Game loaded!");
-                        return loadedPlayer;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Failed to load game. Starting a new game.");
-                    }
-                }
-                // Om ingen player finns så skapar vi en ny player
-                Stats playerStats = new Stats(10, 100, 5);
-                Console.WriteLine("Creating a new player.");
-                return new Player("BitchAss", playerStats);
-            
-        }
-    } */ 
     public static class GameDataManager
     {
         public static void SaveGame(Player player, string filePath)

@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-namespace TutorialTheGame
+using TutorialTheGame.Enemies;
+using TutorialTheGame.LootHandler;
+using TutorialTheGame.PlayerChar;
+
+namespace TutorialTheGame.GameHandler
 {
+    // en static klass för alla tänkbara konsoll utskrift
     public static class Ui
     {
-        //Enemy enemy = new Enemy();
-        // kanske lägga till en "Press anykey to continue" för console.reeadkey
         public static void MenuOptions()
         {
             Console.WriteLine("Your options:");
@@ -17,7 +20,6 @@ namespace TutorialTheGame
             Console.WriteLine("5. End The Game");
             Console.WriteLine("6. Show Inventory");
             Console.Write("Choose 1-6:");
-           // string input = Console.ReadLine();
         }
         public static void SpellOptions()
         {
@@ -166,7 +168,7 @@ namespace TutorialTheGame
             Thread.Sleep(1200);
             Console.WriteLine("But you did not hesitate, for you had your reasons to be here.");
             Thread.Sleep(1200);
-            Console.WriteLine("Maybe it was to prove something to yourself, maybe to someone else—whatever it was, you knew that the tower held the answers you sought.");
+            Console.WriteLine("Maybe it was to prove something to yourself, maybe to someone else, whatever it was, you knew that the tower held the answers you sought.");
             Thread.Sleep(1200);
         }
         public static void FirstFloorStory()
@@ -175,7 +177,7 @@ namespace TutorialTheGame
             Thread.Sleep(1200);
             Console.WriteLine("The Apprentice Mages, frail but unpredictable, hurled fireballs that threatened to catch you off guard.");
             Thread.Sleep(1200);
-            Console.WriteLine("You fought through novice assassins—quick and cunning—who ambushed from the shadows, testing your reflexes and resolve.");
+            Console.WriteLine("You fought through novice assassins, quick and cunning, who ambushed from the shadows, testing your reflexes and resolve.");
             Thread.Sleep(1200);
             Console.WriteLine("These initial trials were meant to weed out the unworthy.");
             Thread.Sleep(1200);
@@ -233,32 +235,3 @@ namespace TutorialTheGame
 
 }
 
-/* foreach (var enemy in enemies)  // TEST FÖR ATT SE ATT VAPEN FUNGERAR 
-        {
-            if (enemy.loot == null)
-            {
-                Console.WriteLine($"Warning: {enemy.Name} does not have a loot instance.");
-                continue;
-            }
-
-            Weapon testLoot = enemy.DropLoot();
-            if (testLoot == null)
-            {
-                Console.WriteLine($"Warning: {enemy.Name} could not drop loot (loot list might be empty).");
-            }
-            else
-            {
-                Console.WriteLine($"Test: {enemy.Name} can drop {testLoot.Name} with {testLoot.Damage} damage.");
-            }
-        }
-        Loot lootTest = new Loot();
-        Weapon testWeapon = lootTest.GenerateLoot();
-
-        if (testWeapon != null)
-        {
-            Console.WriteLine($"Test loot: {testWeapon.Name} with {testWeapon.Damage} damage and rarity {testWeapon.Rarity}.");
-        }
-        else
-        {
-            Console.WriteLine("Test loot failed to generate a weapon.");
-        } */ 

@@ -1,16 +1,13 @@
-﻿
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+using TutorialTheGame.Enemies;
+using TutorialTheGame.GameHandler;
 
-namespace TutorialTheGame
+namespace TutorialTheGame.PlayerChar
 {
     class CharacterSpells
     {
-        // kanske ha heal här med som en vanlig spell?? sätta level requirements
+        // kanske ha heal här
         private Random random = new Random();
         
         // bool för att se om playern har tillräckligt med mana för att attackera, så vi kan använda den på alla spells
@@ -66,7 +63,7 @@ namespace TutorialTheGame
             return 0;
         }
         public double ArcaneBlast(Player player)
-        {  // A focused blast of raw arcane energy that ignores armor and shields. göra om så den ignorerar armor.
+        {  // A focused blast of raw arcane energy
             int BaseDamage = 40;
             int manaCost = 30;
 

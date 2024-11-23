@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TutorialTheGame.GameHandler;
+using TutorialTheGame.LootHandler;
 
-namespace TutorialTheGame       // to do, defend för arcane damage? med tanke på att den ska ignorera armor.
+namespace TutorialTheGame.Enemies      // to do, defend för arcane damage? med tanke på att den ska ignorera armor.
 {   //skapa entities istället och ha subklasser för enemies?
     public abstract class Enemy  //abstrakt klass för alla andra enemies ärver från denna och har gemensamma egenskaper och metoder
     {
@@ -45,8 +43,6 @@ namespace TutorialTheGame       // to do, defend för arcane damage? med tanke p
         {
             return $"{Name} have {Health:F0} HP"; // avrundar till närmsta heltal med :F0
         }
-
-            // Fienden attackerar.
         public virtual int Attack()  //kanske en default attack
         {
             return 0;
