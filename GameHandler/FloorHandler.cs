@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using TutorialTheGame.Enemies;
 
-namespace TutorialTheGame
+namespace TutorialTheGame.GameHandler
 {
     public class FloorHandler
     {
@@ -10,13 +11,14 @@ namespace TutorialTheGame
 
         public FloorHandler()
         {
-            CurrentFloor = 1; //7
+            CurrentFloor = 1;
         }
         public void AdvanceFloor()
         {
             CurrentFloor++;
             Console.WriteLine($"You've defeated all your enemies and embark in the tower to {CurrentFloor} floor!");
         }
+        // skapar en lista med enemies beroende på vilken floor man är på, om det är 10 så skapas en boss istället
         public List<Enemy> CreateEnemies()
         {
             List<Enemy> enemies = new List<Enemy>();
@@ -26,7 +28,7 @@ namespace TutorialTheGame
             }
             else
             {
-                int numberOfEnemies = random.Next(1,2 + CurrentFloor);
+                int numberOfEnemies = random.Next(1,2 + CurrentFloor); //slumpar hur många fiender baserat på floor
                 for (int i = 0; i < numberOfEnemies; i++)
                 {
                     Enemy enemy = CreateEnemyForFloor();
@@ -39,8 +41,8 @@ namespace TutorialTheGame
         {
             return random.Next(2) switch
             {
-                0 => new Mage("Apprentice Mage", 200),
-                _ => new Assassin("Novice Assasin", 200)
+                0 => new Mage("Apprentice Mage", 20),
+                _ => new Assassin("Novice Assasin", 20)
             };
         }
         public Enemy CreateMidLevelEnemy()
@@ -62,7 +64,8 @@ namespace TutorialTheGame
                 _ => new Shaman("Shaman of the Forest", 40)
             };
         }
-        public Enemy CreateEnemyForFloor()  // om det är 10, skapa boss, om det är 1-3 skapa low, 4-6 mid, 7-9 highlevel, måste ha <= => på båda sidorna.
+        // om det är 10, skapa boss, om det är 1-3 skapa low, 4-6 mid, 7-9 highlevel, måste ha <= => på båda sidorna.
+        public Enemy CreateEnemyForFloor()  
         {
             Enemy enemy = CurrentFloor switch
             {
@@ -71,13 +74,8 @@ namespace TutorialTheGame
                 <= 6 => CreateMidLevelEnemy(),
                 _ => CreateHighLevelEnemy()
             };
-            enemy.MakeEnemyStronger(CurrentFloor);
+            enemy.MakeEnemyStronger(CurrentFloor); //gör enemies starkare beroende på vilken nivå man är på
             return enemy;
         }
     }
-}  // istället för olika metoder, lite mer generell, lite kortare, en enda metod? en lista med alla tänkbara fienderna,
-// i listan finns t.ex dom finns på level 1,2 etc, max / min level,
-// inte så många if satser, utan som mer en databas med olika enemies som kan slumpa fram, t.ex 1-2 enemies från level 1-4, 
-//slumpar ut dom som har minimum level 2 och max floor typ 4, (inklusive)
-
-// generisk metod, polymorfism?
+} 
